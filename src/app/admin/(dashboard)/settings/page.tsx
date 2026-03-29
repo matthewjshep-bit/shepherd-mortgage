@@ -32,7 +32,7 @@ export default function SettingsPage() {
         saveRateConfigAction({
           base_rate: rateConfig.base_rate,
           base_points: rateConfig.base_points,
-          adjustments: rateConfig.adjustments,
+          adjustments: { ...rateConfig.adjustments },
         }),
         saveCompanySettingsAction({
           company_name: company.company_name,
