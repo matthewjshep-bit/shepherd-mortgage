@@ -62,7 +62,7 @@ export async function updateApplicationAction(
     }).eq('id', id);
   } else {
     const { updateApplication } = await import('@/lib/local-storage');
-    updateApplication(id, updates as any);
+    updateApplication(id, updates as Partial<LoanApplication>);
   }
   return { success: true };
 }
@@ -91,7 +91,7 @@ export async function saveRateConfigAction(config: { base_rate: number; base_poi
     }
   } else {
     const { saveRateConfig } = await import('@/lib/local-storage');
-    saveRateConfig(config as any);
+    saveRateConfig(config as Record<string, number | Record<string, number>>);
   }
   return { success: true };
 }

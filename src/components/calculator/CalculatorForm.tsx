@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { calculateDealEconomics, suggestLoanAmount, calculateMaxLoanAmount, DEFAULT_RATE_CONFIG, RTL_PRICING_TABLE } from '@/lib/calculations';
 import { formatCurrency, formatCurrencyWithCents, formatPercent, formatNumberWithCommas, parseCurrencyInput, getLTVColor } from '@/lib/format';
-import type { CalculatorInputs, CalculatorOutputs, RateConfig, ExperienceTier } from '@/types';
+import type { CalculatorInputs, RateConfig } from '@/types';
 import { ArrowRight, TrendingUp, DollarSign, PiggyBank, AlertTriangle, CheckCircle, Info, ShieldCheck } from 'lucide-react';
 
 const INITIAL_INPUTS: CalculatorInputs = {
@@ -27,7 +27,6 @@ interface Props {
 export default function CalculatorForm({ rateConfig }: Props) {
   const config = rateConfig || DEFAULT_RATE_CONFIG;
   const [inputs, setInputs] = useState<CalculatorInputs>(INITIAL_INPUTS);
-  const [outputs, setOutputs] = useState<CalculatorOutputs | null>(null);
   const [currencyDisplays, setCurrencyDisplays] = useState({
     purchasePrice: '',
     rehabBudget: '',
@@ -35,18 +34,12 @@ export default function CalculatorForm({ rateConfig }: Props) {
     loanAmountRequested: '',
   });
 
-  const recalculate = useCallback((currentInputs: CalculatorInputs) => {
-    if (currentInputs.purchasePrice > 0) {
-      const result = calculateDealEconomics(currentInputs, config);
-      setOutputs(result);
-    } else {
-      setOutputs(null);
+  const outputs = useMemo(() => {
+    if (inputs.purchasePrice > 0) {
+      return calculateDealEconomics(inputs, config);
     }
-  }, [config]);
-
-  useEffect(() => {
-    recalculate(inputs);
-  }, [inputs, recalculate]);
+    return null;
+  }, [inputs, config]);
 
   const handleCurrencyChange = (field: keyof typeof currencyDisplays, rawValue: string) => {
     const numericValue = parseCurrencyInput(rawValue);

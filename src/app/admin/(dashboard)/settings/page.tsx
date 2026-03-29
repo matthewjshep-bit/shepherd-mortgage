@@ -2,21 +2,21 @@
 
 import { useEffect, useState, useTransition } from 'react';
 import { fetchRateConfig, fetchCompanySettings, saveRateConfigAction, saveCompanySettingsAction } from '@/app/admin/actions';
-import type { RateConfig, RateAdjustments } from '@/types';
+import type { RateConfig, RateAdjustments, CompanySettings } from '@/types';
 import { DEFAULT_RATE_CONFIG } from '@/lib/calculations';
 import { Save, Loader2, Sliders, Building } from 'lucide-react';
 
 export default function SettingsPage() {
   const [saving, startSaving] = useTransition();
   const [rateConfig, setRateConfig] = useState<RateConfig>(DEFAULT_RATE_CONFIG);
-  const [company, setCompany] = useState({ company_name: 'Shepherd Mortgage', contact_email: '', contact_phone: '', logo_url: '' });
+  const [company, setCompany] = useState<Partial<CompanySettings>>({ company_name: 'Shepherd Mortgage', contact_email: '', contact_phone: '', logo_url: '' });
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
       const [rc, cs] = await Promise.all([fetchRateConfig(), fetchCompanySettings()]);
       if (rc) setRateConfig(rc as RateConfig);
-      if (cs) setCompany(cs as any);
+      if (cs) setCompany(cs as CompanySettings);
       setLoaded(true);
     };
     loadData();
@@ -35,9 +35,9 @@ export default function SettingsPage() {
           adjustments: { ...rateConfig.adjustments },
         }),
         saveCompanySettingsAction({
-          company_name: company.company_name,
-          contact_email: company.contact_email,
-          contact_phone: company.contact_phone,
+          company_name: company.company_name || 'Shepherd Mortgage',
+          contact_email: company.contact_email || '',
+          contact_phone: company.contact_phone || '',
         }),
       ]);
     });

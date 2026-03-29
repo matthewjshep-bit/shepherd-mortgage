@@ -3,9 +3,10 @@
 import { useEffect, useState, useTransition, use } from 'react';
 import { fetchApplication, fetchDocuments, updateApplicationAction } from '@/app/admin/actions';
 import { calculateDealEconomics, DEFAULT_RATE_CONFIG } from '@/lib/calculations';
-import { formatCurrency, formatCurrencyWithCents, formatPercent, formatDate, formatStatus, getStatusColor, getLTVColor, formatFileSize } from '@/lib/format';
+import { formatCurrency, formatCurrencyWithCents, formatPercent, formatDate, formatStatus, getLTVColor, formatFileSize } from '@/lib/format';
 import type { LoanApplication, ApplicationDocument, CalculatorInputs, UnderwritingChecklist, ApplicationStatus } from '@/types';
-import { ArrowLeft, FileText, Eye, X, Save, Loader2, CheckSquare, Square, ExternalLink, ZoomIn, ZoomOut } from 'lucide-react';
+import { ArrowLeft, Loader2, FileText, Square, CheckSquare, Eye, ZoomIn, ZoomOut, X, ExternalLink, Save } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const CHECKLIST_ITEMS: { key: keyof UnderwritingChecklist; label: string }[] = [
@@ -186,11 +187,12 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
                       className="w-full flex items-center gap-3 bg-surface-secondary rounded-lg p-3 border border-border hover:border-navy/30 hover:bg-navy/5 transition-all cursor-pointer text-left group"
                     >
                       {isImage ? (
-                        <div className="w-10 h-10 rounded-lg overflow-hidden bg-white border border-border shrink-0">
-                          <img 
+                        <div className="w-10 h-10 rounded-lg overflow-hidden bg-white border border-border shrink-0 relative">
+                          <Image 
                             src={`/api/documents?path=${encodeURIComponent(doc.storage_path)}`}
                             alt={doc.file_name}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                           />
                         </div>
                       ) : (
@@ -328,13 +330,23 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
               {/* Viewer area */}
               <div className="flex-1 overflow-auto flex items-center justify-center p-4" onClick={() => setViewingDoc(null)}>
                 {isImage && (
-                  <img
-                    src={docUrl}
-                    alt={viewingDoc.file_name}
-                    className="max-w-none rounded-lg shadow-2xl transition-transform duration-200"
-                    style={{ transform: `scale(${zoom})` }}
+                  <div 
+                    className="relative transition-transform duration-200"
+                    style={{ 
+                      transform: `scale(${zoom})`, 
+                      width: '90vw', 
+                      height: '80vh' 
+                    }}
                     onClick={(e) => e.stopPropagation()}
-                  />
+                  >
+                    <Image
+                      src={docUrl}
+                      alt={viewingDoc.file_name}
+                      fill
+                      className="object-contain rounded-lg shadow-2xl"
+                      unoptimized
+                    />
+                  </div>
                 )}
                 {isPdf && (
                   <iframe

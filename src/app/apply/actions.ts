@@ -2,7 +2,7 @@
 
 import { calculateDealEconomics, DEFAULT_RATE_CONFIG } from '@/lib/calculations';
 import { isSupabaseConfigured } from '@/lib/local-storage';
-import type { CalculatorInputs } from '@/types';
+import type { LoanApplication, ApplicationDocument, CalculatorInputs } from '@/types';
 
 export interface SubmitApplicationResult {
   success: boolean;
@@ -183,7 +183,7 @@ export async function submitApplication(formData: FormData): Promise<SubmitAppli
         conditions: null,
         underwriting_checklist: {},
         submitted_by: null,
-      } as any);
+      } as Omit<LoanApplication, 'id' | 'created_at' | 'updated_at'>);
 
       // Upload documents locally
       const documentTypes = ['purchase_contract', 'sow', 'proof_of_funds', 'entity_docs', 'photo_id', 'other'];
@@ -194,7 +194,7 @@ export async function submitApplication(formData: FormData): Promise<SubmitAppli
           const storagePath = await saveUploadedFile(application.id, docType, file);
           insertDocument({
             application_id: application.id,
-            document_type: docType as any,
+            document_type: docType as ApplicationDocument['document_type'],
             file_name: file.name,
             file_size: file.size,
             file_type: file.type,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { fetchApplications } from '@/app/admin/actions';
 import { formatCurrency, formatPercent, formatDate, formatStatus, getStatusColor } from '@/lib/format';
@@ -9,7 +9,6 @@ import { Search, Filter } from 'lucide-react';
 
 export default function ApplicationsPage() {
   const [apps, setApps] = useState<LoanApplication[]>([]);
-  const [filtered, setFiltered] = useState<LoanApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -18,13 +17,12 @@ export default function ApplicationsPage() {
     const loadApps = async () => {
       const data = await fetchApplications();
       setApps(data);
-      setFiltered(data);
       setLoading(false);
     };
     loadApps();
   }, []);
 
-  useEffect(() => {
+  const filtered = useMemo(() => {
     let results = apps;
     if (statusFilter !== 'all') {
       results = results.filter(a => a.status === statusFilter);
@@ -37,7 +35,7 @@ export default function ApplicationsPage() {
         a.ref_number?.toLowerCase().includes(q)
       );
     }
-    setFiltered(results);
+    return results;
   }, [search, statusFilter, apps]);
 
   if (loading) return <div className="p-8 text-text-tertiary">Loading applications...</div>;

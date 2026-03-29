@@ -7,10 +7,45 @@ import DocumentUploader from '@/components/application/DocumentUploader';
 import { submitApplication } from '@/app/apply/actions';
 import { parseCurrencyInput, formatNumberWithCommas, formatCurrency, formatPercent } from '@/lib/format';
 import { calculateDealEconomics, DEFAULT_RATE_CONFIG, RTL_PRICING_TABLE } from '@/lib/calculations';
-import type { CalculatorInputs } from '@/types';
-import { CheckCircle, ArrowLeft, ArrowRight, Loader2, Shield, FileText } from 'lucide-react';
+import type { CalculatorInputs, ApplicationFormData } from '@/types';
+import { ArrowLeft, ArrowRight, Loader2, FileText, CheckCircle, Shield } from 'lucide-react';
 
 interface UploadedFile { file: File; preview?: string; }
+
+const CurrencyInput = ({ 
+  field, 
+  label, 
+  placeholder, 
+  form, 
+  updateField, 
+  formatCurrencyField, 
+  unformatCurrencyField 
+}: { 
+  field: keyof ApplicationFormData; 
+  label: string; 
+  placeholder: string;
+  form: ApplicationFormData;
+  updateField: (f: keyof ApplicationFormData, v: string) => void;
+  formatCurrencyField: (f: keyof ApplicationFormData) => void;
+  unformatCurrencyField: (f: keyof ApplicationFormData) => void;
+}) => (
+  <div>
+    <label className="block text-sm font-medium text-text-secondary mb-1.5">{label} *</label>
+    <div className="relative">
+      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary font-medium">$</span>
+      <input
+        type="text"
+        inputMode="numeric"
+        placeholder={placeholder}
+        className="w-full border border-border rounded-lg pl-7 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
+        value={form[field as keyof typeof form]}
+        onChange={(e) => updateField(field, e.target.value.replace(/[^0-9]/g, ''))}
+        onBlur={() => formatCurrencyField(field)}
+        onFocus={() => unformatCurrencyField(field)}
+      />
+    </div>
+  </div>
+);
 
 export default function ApplicationForm() {
   const searchParams = useSearchParams();
@@ -133,25 +168,6 @@ export default function ApplicationForm() {
     );
   }
 
-  const CurrencyInput = ({ field, label, placeholder }: { field: string; label: string; placeholder: string }) => (
-    <div>
-      <label className="block text-sm font-medium text-text-secondary mb-1.5">{label} *</label>
-      <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary font-medium">$</span>
-        <input
-          type="text"
-          inputMode="numeric"
-          placeholder={placeholder}
-          className="w-full border border-border rounded-lg pl-7 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy"
-          value={form[field as keyof typeof form]}
-          onChange={(e) => updateField(field, e.target.value.replace(/[^0-9]/g, ''))}
-          onBlur={() => formatCurrencyField(field)}
-          onFocus={() => unformatCurrencyField(field)}
-        />
-      </div>
-    </div>
-  );
-
   return (
     <div className="max-w-3xl mx-auto">
       {/* Progress */}
@@ -186,10 +202,10 @@ export default function ApplicationForm() {
             <input placeholder="Zip" className="border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy/20" value={form.propertyZip} onChange={e => updateField('propertyZip', e.target.value)} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <CurrencyInput field="purchasePrice" label="Purchase Price" placeholder="350,000" />
-            <CurrencyInput field="rehabBudget" label="Rehab Budget" placeholder="75,000" />
-            <CurrencyInput field="arv" label="After Repair Value" placeholder="525,000" />
-            <CurrencyInput field="loanAmountRequested" label="Loan Amount Requested" placeholder="262,500" />
+            <CurrencyInput field="purchasePrice" label="Purchase Price" placeholder="350,000" form={form} updateField={updateField} formatCurrencyField={formatCurrencyField} unformatCurrencyField={unformatCurrencyField} />
+            <CurrencyInput field="rehabBudget" label="Rehab Budget" placeholder="75,000" form={form} updateField={updateField} formatCurrencyField={formatCurrencyField} unformatCurrencyField={unformatCurrencyField} />
+            <CurrencyInput field="arv" label="After Repair Value" placeholder="525,000" form={form} updateField={updateField} formatCurrencyField={formatCurrencyField} unformatCurrencyField={unformatCurrencyField} />
+            <CurrencyInput field="loanAmountRequested" label="Loan Amount Requested" placeholder="262,500" form={form} updateField={updateField} formatCurrencyField={formatCurrencyField} unformatCurrencyField={unformatCurrencyField} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <div>
