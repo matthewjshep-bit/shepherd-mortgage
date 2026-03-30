@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { fetchApplications } from '@/app/admin/actions';
 import { formatCurrency, formatPercent, formatDate, formatStatus, getStatusColor } from '@/lib/format';
 import type { LoanApplication, ApplicationStatus } from '@/types';
-import { Search, Filter } from 'lucide-react';
+import Search from 'lucide-react/dist/esm/icons/search';
+import Filter from 'lucide-react/dist/esm/icons/filter';
 
 export default function ApplicationsPage() {
   const [apps, setApps] = useState<LoanApplication[]>([]);
