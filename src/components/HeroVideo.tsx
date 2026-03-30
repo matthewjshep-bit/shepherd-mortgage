@@ -1,11 +1,24 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.warn('Autoplay with sound was blocked. Defaulting to muted autoplay.', err);
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          setIsMuted(true);
+          videoRef.current.play();
+        }
+      });
+    }
+  }, []);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -20,7 +33,6 @@ export default function HeroVideo() {
         <video
           ref={videoRef}
           autoPlay
-          muted
           loop
           playsInline
           className="w-full h-auto aspect-video object-cover"
