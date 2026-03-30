@@ -2,40 +2,80 @@
 
 import { isSupabaseConfigured } from '@/lib/local-storage';
 import type { LoanApplication, ApplicationDocument, ApplicationStatus } from '@/types';
+import { createServiceClient } from '@/lib/supabase';
+import { 
+  getApplications as getLocalApplications, 
+  getApplication as getLocalApplicationById,
+  getDocuments as getLocalDocuments 
+} from '@/lib/local-storage';
 
 export async function fetchApplications(): Promise<LoanApplication[]> {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    return getLocalApplications();
+  }
+
+  try {
     const supabase = createServiceClient();
-    const { data } = await supabase.from('loan_applications').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase
+      .from('loan_applications')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching from Supabase:', error);
+      return getLocalApplications();
+    }
     return (data || []) as LoanApplication[];
-  } else {
-    const { getApplications } = await import('@/lib/local-storage');
-    return getApplications();
+  } catch (err) {
+    console.error('Exception in fetchApplications:', err);
+    return getLocalApplications();
   }
 }
 
 export async function fetchApplication(id: string): Promise<LoanApplication | null> {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    return getLocalApplicationById(id);
+  }
+
+  try {
     const supabase = createServiceClient();
-    const { data } = await supabase.from('loan_applications').select('*').eq('id', id).single();
+    const { data, error } = await supabase
+      .from('loan_applications')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching from Supabase:', error);
+      return getLocalApplicationById(id);
+    }
     return data as LoanApplication | null;
-  } else {
-    const { getApplication } = await import('@/lib/local-storage');
-    return getApplication(id);
+  } catch (err) {
+    console.error('Exception in fetchApplicationById:', err);
+    return getLocalApplicationById(id);
   }
 }
 
 export async function fetchDocuments(applicationId: string): Promise<ApplicationDocument[]> {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    return getLocalDocuments(applicationId);
+  }
+
+  try {
     const supabase = createServiceClient();
-    const { data } = await supabase.from('application_documents').select('*').eq('application_id', applicationId);
+    const { data, error } = await supabase
+      .from('application_documents')
+      .select('*')
+      .eq('application_id', applicationId);
+
+    if (error) {
+      console.error('Error fetching from Supabase:', error);
+      return getLocalDocuments(applicationId);
+    }
     return (data || []) as ApplicationDocument[];
-  } else {
-    const { getDocuments } = await import('@/lib/local-storage');
-    return getDocuments(applicationId);
+  } catch (err) {
+    console.error('Exception in fetchDocuments:', err);
+    return getLocalDocuments(applicationId);
   }
 }
 
@@ -53,14 +93,26 @@ export async function updateApplicationAction(
     conditions?: string | null;
   }
 ): Promise<{ success: boolean }> {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    const { updateApplication } = await import('@/lib/local-storage');
+    updateApplication(id, updates as Partial<LoanApplication>);
+    return { success: true };
+  }
+
+  try {
     const supabase = createServiceClient();
-    await supabase.from('loan_applications').update({
+    const { error } = await supabase.from('loan_applications').update({
       ...updates,
       updated_at: new Date().toISOString(),
     }).eq('id', id);
-  } else {
+
+    if (error) {
+      console.error('Error updating Supabase:', error);
+      const { updateApplication } = await import('@/lib/local-storage');
+      updateApplication(id, updates as Partial<LoanApplication>);
+    }
+  } catch (err) {
+    console.error('Exception in updateApplicationAction:', err);
     const { updateApplication } = await import('@/lib/local-storage');
     updateApplication(id, updates as Partial<LoanApplication>);
   }
@@ -68,20 +120,35 @@ export async function updateApplicationAction(
 }
 
 export async function fetchRateConfig() {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    const { getRateConfig } = await import('@/lib/local-storage');
+    return getRateConfig();
+  }
+
+  try {
     const supabase = createServiceClient();
-    const { data } = await supabase.from('rate_config').select('*').limit(1).single();
+    const { data, error } = await supabase.from('rate_config').select('*').limit(1).single();
+    if (error) {
+      console.error('Error fetching rate config from Supabase:', error);
+      const { getRateConfig } = await import('@/lib/local-storage');
+      return getRateConfig();
+    }
     return data;
-  } else {
+  } catch (err) {
+    console.error('Exception in fetchRateConfig:', err);
     const { getRateConfig } = await import('@/lib/local-storage');
     return getRateConfig();
   }
 }
 
 export async function saveRateConfigAction(config: { base_rate: number; base_points: number; adjustments: Record<string, number> }) {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    const { saveRateConfig } = await import('@/lib/local-storage');
+    saveRateConfig(config as Record<string, number | Record<string, number>>);
+    return { success: true };
+  }
+
+  try {
     const supabase = createServiceClient();
     const { data: existing } = await supabase.from('rate_config').select('id').limit(1).single();
     if (existing) {
@@ -89,7 +156,8 @@ export async function saveRateConfigAction(config: { base_rate: number; base_poi
     } else {
       await supabase.from('rate_config').insert(config);
     }
-  } else {
+  } catch (err) {
+    console.error('Exception in saveRateConfigAction:', err);
     const { saveRateConfig } = await import('@/lib/local-storage');
     saveRateConfig(config as Record<string, number | Record<string, number>>);
   }
@@ -97,20 +165,35 @@ export async function saveRateConfigAction(config: { base_rate: number; base_poi
 }
 
 export async function fetchCompanySettings() {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    const { getCompanySettings } = await import('@/lib/local-storage');
+    return getCompanySettings();
+  }
+
+  try {
     const supabase = createServiceClient();
-    const { data } = await supabase.from('company_settings').select('*').limit(1).single();
+    const { data, error } = await supabase.from('company_settings').select('*').limit(1).single();
+    if (error) {
+      console.error('Error fetching company settings from Supabase:', error);
+      const { getCompanySettings } = await import('@/lib/local-storage');
+      return getCompanySettings();
+    }
     return data;
-  } else {
+  } catch (err) {
+    console.error('Exception in fetchCompanySettings:', err);
     const { getCompanySettings } = await import('@/lib/local-storage');
     return getCompanySettings();
   }
 }
 
 export async function saveCompanySettingsAction(settings: { company_name: string; contact_email: string; contact_phone: string }) {
-  if (isSupabaseConfigured()) {
-    const { createServiceClient } = await import('@/lib/supabase');
+  if (!isSupabaseConfigured()) {
+    const { saveCompanySettings } = await import('@/lib/local-storage');
+    saveCompanySettings(settings);
+    return { success: true };
+  }
+
+  try {
     const supabase = createServiceClient();
     const { data: existing } = await supabase.from('company_settings').select('id').limit(1).single();
     if (existing) {
@@ -118,7 +201,8 @@ export async function saveCompanySettingsAction(settings: { company_name: string
     } else {
       await supabase.from('company_settings').insert(settings);
     }
-  } else {
+  } catch (err) {
+    console.error('Exception in saveCompanySettingsAction:', err);
     const { saveCompanySettings } = await import('@/lib/local-storage');
     saveCompanySettings(settings);
   }
