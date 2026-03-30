@@ -3,7 +3,8 @@ import path from 'path';
 import type { LoanApplication, ApplicationDocument, RateConfig, CompanySettings } from '@/types';
 import { DEFAULT_RATE_CONFIG } from '@/lib/calculations';
 
-const DATA_DIR = path.join(process.cwd(), '.data');
+const isVercel = !!process.env.VERCEL;
+const DATA_DIR = isVercel ? '/tmp/.data' : path.join(process.cwd(), '.data');
 const APPS_FILE = path.join(DATA_DIR, 'applications.json');
 const DOCS_FILE = path.join(DATA_DIR, 'documents.json');
 const RATE_FILE = path.join(DATA_DIR, 'rate_config.json');
@@ -11,8 +12,12 @@ const COMPANY_FILE = path.join(DATA_DIR, 'company_settings.json');
 const UPLOADS_DIR = path.join(DATA_DIR, 'uploads');
 
 function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  } catch (error) {
+    console.warn('Failed to ensure data directories. Supabase fallback local storage may not work correctly in this environment:', error);
+  }
 }
 
 function readJSON<T>(filePath: string, fallback: T): T {
