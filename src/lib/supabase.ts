@@ -19,9 +19,9 @@ export function createClient() {
   if (!isConfigured(supabaseUrl, supabaseAnonKey)) {
     console.warn('Supabase browser client called without valid configuration. Returning null-proxy.');
     // Return a proxy that logs errors when called to prevent easy-to-miss silent failures
-    return new Proxy({} as any, {
+    return new Proxy(Object.create(null), {
       get: () => { throw new Error('Supabase client used before configuration. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY') }
-    });
+    }) as never;
   }
   return createBrowserClient(supabaseUrl!, supabaseAnonKey!);
 }
@@ -33,9 +33,9 @@ export function createClient() {
 export function createServiceClient() {
   if (!isConfigured(supabaseUrl, supabaseServiceKey)) {
     console.warn('Supabase service client called without valid configuration.');
-    return new Proxy({} as any, {
+    return new Proxy(Object.create(null), {
       get: () => { throw new Error('Supabase service client used before configuration. Please set SUPABASE_SERVICE_ROLE_KEY') }
-    });
+    }) as never;
   }
   return createSupabaseClient(supabaseUrl!, supabaseServiceKey!);
 }
