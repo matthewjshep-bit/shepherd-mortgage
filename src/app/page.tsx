@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Shield, Clock, TrendingUp, Calculator, ArrowRight, CheckCircle } from "lucide-react";
 import HeroVideo from "@/components/HeroVideo";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
@@ -199,21 +200,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-navy-dark py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
-              <Image src="/logo.png" alt="Shepherd Mortgage" width={120} height={36} className="h-8 w-auto brightness-0 invert" />
-            </div>
-            <div className="flex items-center gap-8">
-              <Link href="/calculator" className="text-sm text-white/40 hover:text-white/70 transition-colors">Calculator</Link>
-              <Link href="/apply" className="text-sm text-white/40 hover:text-white/70 transition-colors">Apply</Link>
-            </div>
-            <p className="text-sm text-white/25">&copy; {new Date().getFullYear()} Shepherd Mortgage. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

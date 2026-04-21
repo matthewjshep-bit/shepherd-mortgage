@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FileText, Shield } from "lucide-react";
 import ApplicationForm from "@/components/application/ApplicationForm";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Apply for a Loan | Shepherd Mortgage",
@@ -11,7 +12,7 @@ export const metadata = {
 
 export default function ApplyPage() {
   return (
-    <div className="min-h-screen bg-surface-secondary">
+    <div className="min-h-screen bg-surface-secondary flex flex-col">
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -43,11 +44,13 @@ export default function ApplyPage() {
       </div>
 
       {/* Form */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         <Suspense fallback={<div className="text-center py-20 text-text-tertiary">Loading form...</div>}>
           <ApplicationForm />
         </Suspense>
       </div>
+
+      <Footer />
     </div>
   );
 }

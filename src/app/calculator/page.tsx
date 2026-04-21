@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Calculator, Shield } from "lucide-react";
 import CalculatorForm from "@/components/calculator/CalculatorForm";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Fix & Flip Loan Calculator | Shepherd Mortgage",
@@ -10,7 +11,7 @@ export const metadata = {
 
 export default function CalculatorPage() {
   return (
-    <div className="min-h-screen bg-surface-secondary">
+    <div className="min-h-screen bg-surface-secondary flex flex-col">
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
@@ -44,9 +45,11 @@ export default function CalculatorPage() {
       </div>
 
       {/* Calculator */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         <CalculatorForm />
       </div>
+
+      <Footer />
     </div>
   );
 }
