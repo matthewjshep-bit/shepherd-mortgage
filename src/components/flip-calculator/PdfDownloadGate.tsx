@@ -173,17 +173,17 @@ export function PdfDownloadGate({ isOpen, onClose, onDownload }: Props) {
         {GHL_FORM_ID ? (
           <iframe
             src={`https://api.leadconnectorhq.com/widget/form/${GHL_FORM_ID}`}
-            style={{ width: '100%', height: '220px', border: 'none' }}
+            style={{ width: '100%', height: '434px', border: 'none', borderRadius: '8px' }}
             id={`inline-${GHL_FORM_ID}`}
             data-layout='{"id":"INLINE"}'
             data-trigger-type="alwaysShow"
             data-activation-type="alwaysActivated"
             data-deactivation-type="neverDeactivate"
-            data-form-name="Fix & Flip PDF Download"
-            data-height="220"
+            data-form-name="Flip Calculator"
+            data-height="434"
             data-layout-iframe-id={`inline-${GHL_FORM_ID}`}
             data-form-id={GHL_FORM_ID}
-            title="Fix & Flip PDF Download"
+            title="Flip Calculator"
           />
         ) : (
           <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4 text-sm">
