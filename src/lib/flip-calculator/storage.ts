@@ -10,6 +10,12 @@ export interface SavedDeal {
 
 const STORAGE_KEY = 'shepherd-flip-deals';
 
+function generateId(): string {
+  return 'xxxx-xxxx-xxxx'.replace(/x/g, () =>
+    Math.floor(Math.random() * 16).toString(16)
+  );
+}
+
 export function loadDeals(): SavedDeal[] {
   if (typeof window === 'undefined') return [];
   try {
@@ -34,7 +40,7 @@ export function saveDeal(name: string, inputs: DealInputs, existingId?: string):
   }
 
   const newDeal: SavedDeal = {
-    id: crypto.randomUUID(),
+    id: generateId(),
     name,
     inputs,
     createdAt: now,

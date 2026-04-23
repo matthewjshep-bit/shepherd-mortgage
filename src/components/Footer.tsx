@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, User } from "lucide-react";
+import { Mail, Phone, User, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -52,6 +52,13 @@ export default function Footer() {
                   dan@shepmo.com
                 </a>
               </li>
+              <li className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-white/30 shrink-0 mt-0.5" />
+                <span className="text-sm text-white/40">
+                  20491 Forrest Hills Dr.<br />
+                  Saratoga, CA 95070
+                </span>
+              </li>
             </ul>
           </div>
 
@@ -87,6 +94,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/tools/flip-calculator"
+                  className="text-sm text-white/40 hover:text-white/70 transition-colors"
+                >
+                  Fix &amp; Flip Calculator
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/terms"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
@@ -103,6 +118,16 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* SMS Opt-In Disclaimer */}
+        <div className="border-t border-white/10 pt-6 mb-6">
+          <p className="text-xs text-white/25 leading-relaxed max-w-3xl">
+            By submitting a form on this website, you agree to receive SMS messages and phone calls from Shepherd Mortgage regarding your inquiry. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time. Reply HELP for assistance. View our{" "}
+            <Link href="/privacy" className="underline hover:text-white/50 transition-colors">Privacy Policy</Link>{" "}
+            and{" "}
+            <Link href="/terms" className="underline hover:text-white/50 transition-colors">Terms of Service</Link>.
+          </p>
         </div>
 
         {/* Divider */}
