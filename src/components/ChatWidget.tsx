@@ -1,25 +1,13 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 /**
  * LeadConnector chat widget integration.
- * Renders on all pages EXCEPT /apply to comply with the rule that
- * pages with the chat widget must not have forms collecting phone numbers.
+ * Renders on all pages.
  */
 export default function ChatWidget() {
-  const pathname = usePathname();
-
-  // Pages where the chat widget must NOT appear
-  const excludedPaths = ['/apply'];
-  const isExcluded = excludedPaths.some(
-    (path) => pathname === path || pathname.startsWith(`${path}/`)
-  );
-
   useEffect(() => {
-    if (isExcluded) return;
-
     // Check if the script is already loaded
     const existingScript = document.getElementById('chat-widget-script');
     if (existingScript) return;
@@ -32,20 +20,15 @@ export default function ChatWidget() {
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup on unmount (if navigating to an excluded page)
       const script = document.getElementById('chat-widget-script');
       if (script) script.remove();
 
-      // Also remove the widget container if one was injected
       const widgetContainer = document.querySelector('[id*="chat-widget"]');
       if (widgetContainer && widgetContainer.id !== 'chat-widget-script') {
         widgetContainer.remove();
       }
     };
-  }, [isExcluded]);
+  }, []);
 
-  // Don't render anything on excluded pages
-  if (isExcluded) return null;
-
-  return null; // The widget is injected via script, no JSX needed
+  return null;
 }

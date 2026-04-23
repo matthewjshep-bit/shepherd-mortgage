@@ -16,10 +16,18 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Shepherd Mortgage | Hard Money Lending Made Simple",
+  title: "Shepherd Mortgage | Nationwide Investment Property Lending",
   description:
-    "Fast, transparent fix-and-flip bridge loans. Model your deal economics with our interactive calculator and apply in minutes.",
-  keywords: ["hard money lending", "fix and flip", "bridge loans", "real estate investing"],
+    "Bridge, fix and flip, ground-up construction, and long-term rental financing for California real estate investors. Direct access. Real answers. Fewer surprises.",
+  keywords: [
+    "California investment property lending",
+    "bridge loans",
+    "fix and flip loans",
+    "DSCR rental loans",
+    "construction loans",
+    "hard money lending",
+    "real estate investing",
+  ],
 };
 
 export default function RootLayout({
@@ -36,4 +44,3 @@ export default function RootLayout({
     </html>
   );
 }
-

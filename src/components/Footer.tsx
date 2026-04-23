@@ -18,7 +18,7 @@ export default function Footer() {
               className="h-8 w-auto brightness-0 invert mb-4"
             />
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
-              Fast, transparent fix-and-flip bridge loans for real estate investors nationwide.
+              Investment Property Lending for California Real Estate Investors
             </p>
           </div>
 
@@ -37,19 +37,19 @@ export default function Footer() {
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-white/30 shrink-0" />
                 <a
-                  href="tel:+14088218163"
+                  href="tel:+14088218245"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  (408) 821-8163
+                  408.821.8245
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-white/30 shrink-0" />
                 <a
-                  href="mailto:info@shepherdmortgage.com"
+                  href="mailto:dan@shepmo.com"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  info@shepherdmortgage.com
+                  dan@shepmo.com
                 </a>
               </li>
             </ul>
@@ -63,26 +63,26 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/"
+                  href="#about"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  Home
+                  About
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/calculator"
+                  href="#specialties"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  Calculator
+                  Specialties
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/apply"
+                  href="#request"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  Apply Now
+                  Request a Loan
                 </Link>
               </li>
               <li>
@@ -108,9 +108,16 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-white/25">
-              &copy; {new Date().getFullYear()} Shepherd Mortgage. All rights reserved.
-            </p>
+            <div>
+              <p className="text-xs text-white/25">
+                &copy; {new Date().getFullYear()} Shepherd Mortgage. All rights
+                reserved.
+              </p>
+              <p className="text-xs text-white/15 mt-1">
+                Loans made or arranged pursuant to a California Financing Law
+                License. NMLS #XXXXXX.
+              </p>
+            </div>
             <div className="flex items-center gap-6">
               <Link
                 href="/terms"
