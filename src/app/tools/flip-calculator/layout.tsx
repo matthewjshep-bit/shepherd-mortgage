@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Fix and Flip Calculator | Free Deal Analyzer & ROI Tool',
+  title: 'The Ultimate Fix and Flip Calculator | Free Deal Analyzer & ROI Tool',
   description:
     'Free fix and flip calculator. Enter purchase price, ARV, and rehab costs to instantly see net profit, ROI, maximum allowable offer, and deal grade. Based on the 70% rule.',
   keywords: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://shepmo.com/calculator' },
   openGraph: {
-    title: 'Fix and Flip Calculator — Instant Deal Analysis',
+    title: 'The Ultimate Fix and Flip Calculator — Instant Deal Analysis',
     description:
       'Free real-time fix and flip deal analyzer with ROI, MAO, and deal grading.',
     url: 'https://shepmo.com/calculator',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fix and Flip Calculator',
+    title: 'The Ultimate Fix and Flip Calculator',
     description: 'Free real-time fix and flip deal analyzer.',
   },
   robots: {

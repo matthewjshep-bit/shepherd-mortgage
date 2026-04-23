@@ -114,7 +114,7 @@ export const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shepmo.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Fix and Flip Calculator', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'The Ultimate Fix and Flip Calculator', item: SITE_URL },
   ],
 };
 
