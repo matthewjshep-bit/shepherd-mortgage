@@ -40,6 +40,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <ChatWidget />
+        <script src="https://link.msgsndr.com/js/form_embed.js" defer />
       </body>
     </html>
   );

@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from 'react';
 import {
-  ArrowRight,
   ArrowLeft,
   Home,
   Building2,
@@ -15,16 +14,11 @@ import {
   Banknote,
   HardHat,
   Wrench,
-  Zap,
-  Clock,
-  Calendar,
-  CalendarDays,
-  Search,
   CheckCircle,
 } from 'lucide-react';
 
 /* ───────────────── Types ───────────────── */
-type Step = 1 | 2 | 3 | 4 | 5 | 6;
+type Step = 1 | 2 | 3;
 
 interface CardOption {
   label: string;
@@ -50,34 +44,14 @@ const loanPurposes: CardOption[] = [
   { label: 'Rehab / Renovation', icon: Wrench, value: 'rehab' },
 ];
 
-const timelineOptions: CardOption[] = [
-  { label: 'ASAP / 7 Days', icon: Zap, value: '7-days' },
-  { label: '14 Days', icon: Clock, value: '14-days' },
-  { label: '30 Days', icon: Calendar, value: '30-days' },
-  { label: '60+ Days', icon: CalendarDays, value: '60-plus' },
-  { label: 'Just Exploring', icon: Search, value: 'exploring' },
-];
-
-const loanAmountPresets = [
-  '$100K – $250K',
-  '$250K – $500K',
-  '$500K – $1M',
-  '$1M – $2M',
-  '$2M – $5M',
-  '$5M+',
-];
-
 /* ───────────────── Step Labels ───────────────── */
 const stepLabels: Record<Step, string> = {
   1: 'Property Type',
   2: 'Loan Purpose',
-  3: 'Loan Amount',
-  4: 'Timeline',
-  5: 'Deal Details',
-  6: 'Your Info',
+  3: 'Your Info',
 };
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 3;
 
 /* ═══════════════════════════════════════════════════
    Component
@@ -88,9 +62,6 @@ export default function LoanRequestForm() {
 
   const [propertyType, setPropertyType] = useState('');
   const [loanPurpose, setLoanPurpose] = useState('');
-  const [loanAmount, setLoanAmount] = useState('');
-  const [timeline, setTimeline] = useState('');
-  const [scenario, setScenario] = useState('');
 
   const goNext = useCallback(() => {
     setDirection('forward');
@@ -116,15 +87,6 @@ export default function LoanRequestForm() {
 
   const animClass =
     direction === 'forward' ? 'animate-slide-in-right' : 'animate-slide-in-left';
-
-  /* ── Build GHL query params from collected data ── */
-  const ghlParams = new URLSearchParams({
-    ...(propertyType && { property_type: propertyType }),
-    ...(loanPurpose && { loan_purpose: loanPurpose }),
-    ...(loanAmount && { loan_amount: loanAmount }),
-    ...(timeline && { timeline }),
-    ...(scenario && { scenario: scenario.slice(0, 500) }),
-  }).toString();
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -232,111 +194,8 @@ export default function LoanRequestForm() {
           </div>
         )}
 
-        {/* ── Step 3: Loan Amount ── */}
+        {/* ── Step 3: GoHighLevel Form Embed ── */}
         {step === 3 && (
-          <div className={animClass}>
-            <h3 className="text-2xl font-bold text-navy mb-2">
-              Estimated loan amount?
-            </h3>
-            <p className="text-text-secondary mb-8">
-              Select the range that best fits your deal.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {loanAmountPresets.map((amt) => (
-                <button
-                  key={amt}
-                  onClick={() => handleCardSelect(setLoanAmount, amt)}
-                  className={`group flex items-center justify-center p-5 rounded-xl border-2 transition-all duration-200 cursor-pointer ${
-                    loanAmount === amt
-                      ? 'border-navy bg-navy/5 shadow-md'
-                      : 'border-border hover:border-navy/30 hover:shadow-sm bg-white'
-                  }`}
-                >
-                  <span
-                    className={`text-sm font-semibold transition-colors ${
-                      loanAmount === amt ? 'text-navy' : 'text-text-secondary'
-                    }`}
-                  >
-                    {amt}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── Step 4: Timeline ── */}
-        {step === 4 && (
-          <div className={animClass}>
-            <h3 className="text-2xl font-bold text-navy mb-2">
-              How soon do you need to close?
-            </h3>
-            <p className="text-text-secondary mb-8">
-              We&apos;ll prioritize accordingly.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {timelineOptions.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => handleCardSelect(setTimeline, opt.value)}
-                  className={`group flex flex-col items-center gap-3 p-5 rounded-xl border-2 transition-all duration-200 cursor-pointer ${
-                    timeline === opt.value
-                      ? 'border-navy bg-navy/5 shadow-md'
-                      : 'border-border hover:border-navy/30 hover:shadow-sm bg-white'
-                  }`}
-                >
-                  <opt.icon
-                    className={`w-7 h-7 transition-colors ${
-                      timeline === opt.value
-                        ? 'text-navy'
-                        : 'text-text-tertiary group-hover:text-navy'
-                    }`}
-                  />
-                  <span
-                    className={`text-sm font-medium transition-colors ${
-                      timeline === opt.value
-                        ? 'text-navy'
-                        : 'text-text-secondary'
-                    }`}
-                  >
-                    {opt.label}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── Step 5: Scenario Details ── */}
-        {step === 5 && (
-          <div className={animClass}>
-            <h3 className="text-2xl font-bold text-navy mb-2">
-              Tell me about the deal
-            </h3>
-            <p className="text-text-secondary mb-8">
-              Property address, purchase price, rehab budget, ARV, exit
-              plan&nbsp;— anything that helps me evaluate the scenario.
-            </p>
-            <textarea
-              value={scenario}
-              onChange={(e) => setScenario(e.target.value)}
-              placeholder="e.g. 3-unit multifamily in San Jose, $1.2M purchase, $200K rehab, $1.8M ARV, 12-month flip timeline..."
-              rows={6}
-              className="w-full rounded-xl border-2 border-border bg-white p-4 text-text-primary placeholder:text-text-tertiary focus:border-navy focus:outline-none transition-colors resize-none"
-            />
-            <button
-              onClick={goNext}
-              disabled={!scenario.trim()}
-              className="mt-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-navy text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-navy-light disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
-            >
-              Continue
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        )}
-
-        {/* ── Step 6: GoHighLevel Form Embed ── */}
-        {step === 6 && (
           <div className={animClass}>
             <div className="flex items-center gap-3 mb-2">
               <CheckCircle className="w-6 h-6 text-accent-green" />
@@ -371,41 +230,28 @@ export default function LoanRequestForm() {
                     </span>
                   </div>
                 )}
-                {loanAmount && (
-                  <div>
-                    <span className="text-text-tertiary">Amount:&nbsp;</span>
-                    <span className="font-medium text-text-primary">
-                      {loanAmount}
-                    </span>
-                  </div>
-                )}
-                {timeline && (
-                  <div>
-                    <span className="text-text-tertiary">Timeline:&nbsp;</span>
-                    <span className="font-medium text-text-primary capitalize">
-                      {timeline.replace('-', ' ')}
-                    </span>
-                  </div>
-                )}
               </div>
-              {scenario && (
-                <p className="mt-3 text-sm text-text-secondary border-t border-border pt-3 line-clamp-3">
-                  {scenario}
-                </p>
-              )}
             </div>
 
-            {/* GoHighLevel iframe placeholder */}
-            <div className="bg-white rounded-xl border-2 border-border p-6">
+            {/* GoHighLevel Form */}
+            <div className="bg-white rounded-xl border-2 border-border">
               <iframe
-                src={`https://api.leadconnectorhq.com/widget/form/YOUR_GHL_FORM_ID?${ghlParams}`}
-                style={{ width: '100%', height: '400px', border: 'none' }}
-                title="Loan Request Contact Form"
-                loading="lazy"
+                src="https://api.leadconnectorhq.com/widget/form/UAZYCgYsBflEklfuTQPd"
+                style={{ width: '100%', height: '743px', border: 'none', borderRadius: '8px' }}
+                id="inline-UAZYCgYsBflEklfuTQPd"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Shepherd Mortgage"
+                data-height="743"
+                data-layout-iframe-id="inline-UAZYCgYsBflEklfuTQPd"
+                data-form-id="UAZYCgYsBflEklfuTQPd"
+                title="Shepherd Mortgage"
               />
-              <p className="text-xs text-text-tertiary text-center mt-3">
-                Your information is secure and will never be shared.
-              </p>
             </div>
           </div>
         )}
