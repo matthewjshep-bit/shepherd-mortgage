@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Sun,
   Moon,
@@ -9,10 +9,12 @@ import {
   Sparkles,
   Trash2,
   FolderOpen,
+  FileDown,
 } from 'lucide-react';
 import { useFlipCalculator } from '@/components/flip-calculator/useFlipCalculator';
 import InputPanel from '@/components/flip-calculator/InputPanel';
 import DashboardPanel from '@/components/flip-calculator/DashboardPanel';
+import { PdfDownloadGate } from '@/components/flip-calculator/PdfDownloadGate';
 import { saveDeal, loadDeals, deleteDeal, type SavedDeal } from '@/lib/flip-calculator/storage';
 
 export default function FlipCalculatorClient() {
@@ -32,6 +34,10 @@ export default function FlipCalculatorClient() {
   const [showSaved, setShowSaved] = useState(false);
   const [currentDealId, setCurrentDealId] = useState<string | null>(null);
   const [saveToast, setSaveToast] = useState(false);
+  const [gateOpen, setGateOpen] = useState(false);
+
+  // Ref for PDF capture
+  const dashboardRef = useRef<HTMLDivElement>(null);
 
   // Load saved deals on mount
   useEffect(() => {
@@ -66,6 +72,33 @@ export default function FlipCalculatorClient() {
     resetInputs();
     setCurrentDealId(null);
   }, [resetInputs]);
+
+  // PDF download using react-to-pdf
+  const handleDownloadPdf = useCallback(async () => {
+    if (!dashboardRef.current) return;
+
+    // Dynamic import to keep bundle size down
+    const { default: generatePDF, Resolution, Margin } = await import('react-to-pdf');
+
+    const filename = inputs.propertyAddress
+      ? `deal-${inputs.propertyAddress.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.pdf`
+      : `fix-flip-deal-${new Date().toISOString().slice(0, 10)}.pdf`;
+
+    await generatePDF(() => dashboardRef.current, {
+      filename,
+      method: 'save',
+      resolution: Resolution.MEDIUM,
+      page: {
+        margin: Margin.MEDIUM,
+        format: 'letter',
+        orientation: 'portrait',
+      },
+      canvas: {
+        mimeType: 'image/jpeg',
+        qualityRatio: 0.85,
+      },
+    });
+  }, [inputs.propertyAddress]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -123,6 +156,17 @@ export default function FlipCalculatorClient() {
               >
                 <Save className="w-3.5 h-3.5" />
               </button>
+              {/* Export PDF */}
+              {hasInputs && (
+                <button
+                  onClick={() => setGateOpen(true)}
+                  className="flex items-center gap-1.5 text-xs font-medium text-calc-accent bg-calc-accent-bg border border-calc-accent/20 px-3 py-1.5 rounded-lg hover:bg-calc-accent/20 transition-colors cursor-pointer"
+                  title="Export deal as PDF"
+                >
+                  <FileDown className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Export PDF</span>
+                </button>
+              )}
               {/* New */}
               <button
                 onClick={handleNew}
@@ -206,6 +250,7 @@ export default function FlipCalculatorClient() {
             {/* Right: Dashboard */}
             <div className="w-full lg:w-[60%] lg:sticky lg:top-20 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto">
               <DashboardPanel
+                ref={dashboardRef}
                 results={results}
                 inputs={inputs}
                 hasInputs={hasInputs}
@@ -213,6 +258,13 @@ export default function FlipCalculatorClient() {
             </div>
           </div>
         </div>
+
+        {/* PDF Download Gate Modal */}
+        <PdfDownloadGate
+          isOpen={gateOpen}
+          onClose={() => setGateOpen(false)}
+          onDownload={handleDownloadPdf}
+        />
       </div>
     </div>
   );
