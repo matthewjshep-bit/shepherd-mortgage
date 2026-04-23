@@ -152,10 +152,10 @@ export default function LoanRequestForm() {
         {step === 1 && (
           <div className={animClass}>
             <h3 className="text-2xl font-bold text-navy mb-2">
-              What type of property?
+              What are we financing?
             </h3>
             <p className="text-text-secondary mb-8">
-              Select the property type for your deal.
+              Pick the closest match. We&apos;ll get into specifics next.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {propertyTypes.map((opt) => (

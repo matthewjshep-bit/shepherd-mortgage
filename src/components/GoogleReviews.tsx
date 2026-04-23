@@ -14,6 +14,27 @@ interface Review {
 
 const reviews: Review[] = [
   {
+    name: 'Ian Wright',
+    rating: 5,
+    date: '2 years ago',
+    text: 'Working with Dan was awesome! He outlined every step clearly and made the entire experience stress-free.',
+    initials: 'IW',
+  },
+  {
+    name: 'Andre Stewart',
+    rating: 5,
+    date: '2 years ago',
+    text: 'Great company. I have been working with Daniel for years and he always delivers.',
+    initials: 'AS',
+  },
+  {
+    name: 'Emily Russell',
+    rating: 5,
+    date: '2 years ago',
+    text: 'A very good broker. Takes care of his family, so you know he will take care of yours. A+.',
+    initials: 'ER',
+  },
+  {
     name: 'Nick Centineo',
     rating: 5,
     date: '3 months ago',
@@ -75,27 +96,6 @@ const reviews: Review[] = [
     date: '2 years ago',
     text: 'Daniel Shepherd is a true professional who cares deeply about his clients and delivers exceptional results.',
     initials: 'SH',
-  },
-  {
-    name: 'Ian Wright',
-    rating: 5,
-    date: '2 years ago',
-    text: 'Working with Dan was awesome! He outlined every step clearly and made the entire experience stress-free.',
-    initials: 'IW',
-  },
-  {
-    name: 'Andre Stewart',
-    rating: 5,
-    date: '2 years ago',
-    text: 'Great company. I have been working with Daniel for years and he always delivers.',
-    initials: 'AS',
-  },
-  {
-    name: 'Emily Russell',
-    rating: 5,
-    date: '2 years ago',
-    text: 'A very good broker. Takes care of his family, so you know he will take care of yours. A+.',
-    initials: 'ER',
   },
   {
     name: 'Joy Rides',
