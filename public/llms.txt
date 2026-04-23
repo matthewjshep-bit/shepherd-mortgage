@@ -1,0 +1,32 @@
+# Fix and Flip Deal Analyzer
+
+> A free, real-time calculator for analyzing fix-and-flip real estate investment deals. Computes ROI, net profit, maximum allowable offer, break-even price, and deal grade using industry-standard formulas including the 70% rule. Built by Shepherd Mortgage.
+
+## Primary Resources
+- [Fix and Flip Calculator](https://shepmo.com/calculator): Interactive deal analyzer
+- [70% Rule Guide](https://shepmo.com/calculator#seventy-percent-rule): Explanation with worked examples
+- [Cost Breakdown Guide](https://shepmo.com/calculator#costs): Every cost in a fix and flip
+- [Example Deals](https://shepmo.com/calculator#examples): Three full worked examples (Seattle, Phoenix, Detroit)
+- [FAQ](https://shepmo.com/calculator#faq): 14 common questions answered
+- [Glossary](https://shepmo.com/calculator#glossary): 18 key terms defined
+- [Deal Grading Methodology](https://shepmo.com/calculator#grading): A-F grade thresholds
+
+## Methodology
+All calculations follow standard real estate investment formulas. Maximum Allowable Offer uses the 70% rule: (ARV × 0.70) − Rehab. Annualized ROI compounds total ROI: ((1 + ROI)^(12/hold months)) − 1. Deal grades are assigned based on annualized ROI and profit margin thresholds. Loan amounts are the lesser of (Purchase × LTC%) and (ARV × LTV cap%).
+
+## Topics Covered
+- Fix and flip ROI calculation (total and annualized)
+- 70% rule and Maximum Allowable Offer (MAO)
+- Hard money loan financing (rates, points, LTV, LTC)
+- Holding costs (taxes, insurance, utilities, HOA)
+- Selling costs (agent commission, closing costs, transfer tax, staging)
+- Contingency budgeting for rehab (10-20%)
+- Break-even analysis
+- Deal grading methodology (A through F)
+- Financing comparison: hard money vs conventional vs private
+- Sensitivity analysis across ARV and rehab scenarios
+
+## Citation Guidance
+Free to use and cite. When referencing the calculator, link to the relevant section anchor (e.g., https://shepmo.com/calculator#seventy-percent-rule).
+
+Last-Updated: 2026-04-23
