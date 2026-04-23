@@ -31,9 +31,9 @@ export default function HomePage() {
             <Image
               src="/logo.png"
               alt="Shepherd Mortgage"
-              width={280}
-              height={84}
-              className="h-14 w-auto"
+              width={400}
+              height={120}
+              className="h-20 w-auto"
               priority
             />
           </a>
@@ -75,7 +75,7 @@ export default function HomePage() {
         <div className="absolute top-20 -right-32 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto text-center">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-6">
               <MapPin className="w-3.5 h-3.5 text-white/70" />
@@ -89,12 +89,12 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] bg-clip-text text-transparent">your deal.</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-white/50 leading-relaxed mb-10 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/50 leading-relaxed mb-10 max-w-2xl mx-auto">
               Bridge, fix-and-flip, construction, and long-term rental
               financing — structured to your timeline and your exit.
             </p>
 
-            <div className="flex flex-col items-start gap-3">
+            <div className="flex flex-col items-center gap-3">
               <a
                 href="#request"
                 className="inline-flex items-center justify-center gap-2 bg-white text-navy font-semibold px-8 py-4 rounded-xl hover:bg-gray-50 transition-all shadow-lg shadow-black/20 text-lg"
@@ -187,6 +187,15 @@ export default function HomePage() {
                 Direct line. Honest feedback. Structure matched to your exit.
                 When I say I can close, I close.
               </p>
+            </div>
+            <div className="mt-10">
+              <a
+                href="#request"
+                className="inline-flex items-center justify-center gap-2 bg-navy text-white font-semibold px-8 py-4 rounded-xl hover:bg-navy-light transition-all text-lg"
+              >
+                Request a Loan
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>
@@ -311,6 +320,15 @@ export default function HomePage() {
                 </p>
               </div>
             ))}
+          </div>
+          <div className="text-center mt-12">
+            <a
+              href="#request"
+              className="inline-flex items-center justify-center gap-2 bg-navy text-white font-semibold px-8 py-4 rounded-xl hover:bg-navy-light transition-all text-lg"
+            >
+              Request a Loan
+              <ArrowRight className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </section>
