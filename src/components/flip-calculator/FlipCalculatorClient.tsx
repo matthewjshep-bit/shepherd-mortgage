@@ -156,17 +156,6 @@ export default function FlipCalculatorClient() {
               >
                 <Save className="w-3.5 h-3.5" />
               </button>
-              {/* Export PDF */}
-              {hasInputs && (
-                <button
-                  onClick={() => setGateOpen(true)}
-                  className="flex items-center gap-1.5 text-xs font-medium text-calc-accent bg-calc-accent-bg border border-calc-accent/20 px-3 py-1.5 rounded-lg hover:bg-calc-accent/20 transition-colors cursor-pointer"
-                  title="Export deal as PDF"
-                >
-                  <FileDown className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Export PDF</span>
-                </button>
-              )}
               {/* New */}
               <button
                 onClick={handleNew}
@@ -239,6 +228,19 @@ export default function FlipCalculatorClient() {
           </div>
         )}
 
+        {/* Top Export PDF CTA */}
+        {hasInputs && (
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-1 flex justify-center">
+            <button
+              onClick={() => setGateOpen(true)}
+              className="flex items-center gap-2 text-sm font-semibold text-white bg-calc-accent px-6 py-3 rounded-xl hover:bg-calc-accent/90 transition-colors shadow-lg shadow-calc-accent/20 cursor-pointer"
+            >
+              <FileDown className="w-4.5 h-4.5" />
+              Export PDF
+            </button>
+          </div>
+        )}
+
         {/* Main Layout */}
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col lg:flex-row gap-6">
@@ -258,6 +260,19 @@ export default function FlipCalculatorClient() {
             </div>
           </div>
         </div>
+
+        {/* Bottom Export PDF CTA */}
+        {hasInputs && (
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-8 flex justify-center">
+            <button
+              onClick={() => setGateOpen(true)}
+              className="flex items-center gap-2 text-sm font-semibold text-white bg-calc-accent px-6 py-3 rounded-xl hover:bg-calc-accent/90 transition-colors shadow-lg shadow-calc-accent/20 cursor-pointer"
+            >
+              <FileDown className="w-4.5 h-4.5" />
+              Export PDF
+            </button>
+          </div>
+        )}
 
         {/* PDF Download Gate Modal */}
         <PdfDownloadGate
