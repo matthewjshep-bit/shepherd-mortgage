@@ -13,6 +13,21 @@ import {
 } from 'lucide-react';
 import type { DealInputs } from '@/lib/flip-calculator/engine';
 
+/* ─────────── Read-only display ─────────── */
+function ReadOnlyField({ label, value, tooltip }: { label: string; value: string; tooltip?: string }) {
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between">
+        <label className="text-xs font-medium text-calc-muted uppercase tracking-wider">{label}</label>
+        {tooltip && <span className="text-[10px] text-calc-muted/50 hidden sm:inline">{tooltip}</span>}
+      </div>
+      <div className="flex items-center rounded-lg border border-calc-border bg-calc-bg/50 px-3 py-2.5">
+        <span className="text-sm text-calc-text tabular-nums font-medium">{value}</span>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────── Slider+Input Combo ─────────── */
 interface SliderInputProps {
   label: string;
@@ -21,7 +36,7 @@ interface SliderInputProps {
   min: number;
   max: number;
   step: number;
-  prefix?: '$' | '%';
+  prefix?: '$' | '%' | '#';
   suffix?: string;
   tooltip?: string;
   placeholder?: string;
@@ -68,7 +83,7 @@ function SliderInput({
             : 'border-calc-border hover:border-calc-border/80'
         } bg-calc-bg`}
       >
-        <span className="pl-3 text-sm text-calc-muted select-none">{prefix}</span>
+        {prefix !== '#' && <span className="pl-3 text-sm text-calc-muted select-none">{prefix}</span>}
         <input
           type="text"
           inputMode="decimal"
@@ -110,8 +125,8 @@ function SliderInput({
         />
       </div>
       <div className="flex justify-between text-[10px] text-calc-muted/40 tabular-nums">
-        <span>{prefix === '$' ? `$${min.toLocaleString()}` : `${min}%`}</span>
-        <span>{prefix === '$' ? `$${max.toLocaleString()}` : `${max}%`}</span>
+        <span>{prefix === '$' ? `$${min.toLocaleString()}` : suffix ? `${min} ${suffix}` : `${min}%`}</span>
+        <span>{prefix === '$' ? `$${max.toLocaleString()}` : suffix ? `${max} ${suffix}` : `${max}%`}</span>
       </div>
     </div>
   );
@@ -475,7 +490,7 @@ function StepRehab({
           min={1}
           max={24}
           step={1}
-          prefix="%"
+          prefix="#"
           suffix="mos"
           placeholder="3"
           tooltip="Renovation duration in months"
@@ -526,6 +541,27 @@ function StepFinancing({
               tooltip="Most lenders: 65–75%"
             />
           </div>
+          {/* Auto-calculated loan metrics */}
+          {inputs.purchasePrice > 0 && (
+            <div className="grid grid-cols-2 gap-4">
+              <ReadOnlyField
+                label="Loan Amount"
+                value={`$${Math.min(
+                  inputs.purchasePrice * (inputs.ltcPct / 100),
+                  inputs.arv * (inputs.ltvArvCapPct / 100)
+                ).toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                tooltip="Auto-calculated"
+              />
+              <ReadOnlyField
+                label="Cash Required"
+                value={`$${Math.max(0, inputs.purchasePrice - Math.min(
+                  inputs.purchasePrice * (inputs.ltcPct / 100),
+                  inputs.arv * (inputs.ltvArvCapPct / 100)
+                ) + inputs.purchasePrice * (inputs.purchaseClosingPct / 100) + inputs.inspectionCost).toLocaleString('en-US', { maximumFractionDigits: 0 })}`}
+                tooltip="Down payment + closing"
+              />
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <SliderInput
               label="Interest Rate"
@@ -566,7 +602,7 @@ function StepFinancing({
         min={1}
         max={36}
         step={1}
-        prefix="%"
+        prefix="#"
         suffix="mos"
         placeholder="6"
         tooltip="Purchase to sale, including rehab + listing"

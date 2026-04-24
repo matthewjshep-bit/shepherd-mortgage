@@ -10,6 +10,17 @@ function fmt(n: number): string {
   return `${n < 0 ? '-' : ''}$${Math.round(abs)}`;
 }
 
+function fmtShort(n: number): string {
+  const abs = Math.abs(n);
+  if (abs >= 1_000_000) {
+    return `$${(n / 1_000_000).toFixed(1)}M`;
+  }
+  if (abs >= 1_000) {
+    return `$${Math.round(n / 1_000)}k`;
+  }
+  return `$${Math.round(n)}`;
+}
+
 const arvDeltas = [-10, -5, 0, 5, 10];
 const rehabDeltas = [-20, -10, 0, 10, 20];
 
@@ -28,6 +39,10 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
   const allValues = grid.flat();
   const maxProfit = Math.max(...allValues, 1);
   const minProfit = Math.min(...allValues, -1);
+
+  // Pre-compute actual values for headers
+  const arvValues = arvDeltas.map((d) => inputs.arv * (1 + d / 100));
+  const rehabValues = rehabDeltas.map((d) => inputs.rehabCost * (1 + d / 100));
 
   function getCellColor(profit: number): string {
     if (profit > 0) {
@@ -50,15 +65,19 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
         <table className="w-full text-center" style={{ minWidth: 340 }}>
           <thead>
             <tr>
-              <th className="text-[10px] text-calc-muted font-normal pb-2 pr-2 text-left">
-                Rehab ↓ / ARV →
+              <th className="text-[10px] text-calc-muted font-normal pb-1 pr-2 text-left">
+                <span className="block">Rehab ↓</span>
+                <span className="block opacity-50">ARV →</span>
               </th>
-              {arvDeltas.map((d) => (
+              {arvDeltas.map((d, i) => (
                 <th
                   key={d}
-                  className="text-[10px] text-calc-muted font-medium pb-2 px-1"
+                  className="text-[10px] text-calc-muted font-medium pb-1 px-1"
                 >
-                  {d > 0 ? `+${d}%` : d === 0 ? 'Base' : `${d}%`}
+                  <span className="block">{fmtShort(arvValues[i])}</span>
+                  <span className="block opacity-50">
+                    {d > 0 ? `+${d}%` : d === 0 ? 'Base' : `${d}%`}
+                  </span>
                 </th>
               ))}
             </tr>
@@ -67,7 +86,10 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
             {rehabDeltas.map((rd, ri) => (
               <tr key={rd}>
                 <td className="text-[10px] text-calc-muted font-medium py-0.5 pr-2 text-left">
-                  {rd > 0 ? `+${rd}%` : rd === 0 ? 'Base' : `${rd}%`}
+                  <span className="block">{fmtShort(rehabValues[ri])}</span>
+                  <span className="block opacity-50">
+                    {rd > 0 ? `+${rd}%` : rd === 0 ? 'Base' : `${rd}%`}
+                  </span>
                 </td>
                 {arvDeltas.map((_, ci) => {
                   const profit = grid[ri][ci];
@@ -83,7 +105,7 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
                           color: '#E5E7EB',
                           fontFamily: 'var(--font-geist-mono)',
                         }}
-                        title={`ARV ${arvDeltas[ci] >= 0 ? '+' : ''}${arvDeltas[ci]}% / Rehab ${rd >= 0 ? '+' : ''}${rd}%`}
+                        title={`ARV: ${fmtShort(arvValues[ci])} / Rehab: ${fmtShort(rehabValues[ri])}`}
                       >
                         {fmt(profit)}
                       </div>
@@ -98,3 +120,4 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
     </div>
   );
 }
+
