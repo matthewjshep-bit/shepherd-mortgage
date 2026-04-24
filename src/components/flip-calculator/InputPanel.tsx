@@ -203,14 +203,14 @@ interface Step {
 const STEPS: Step[] = [
   {
     id: 'property',
-    title: 'Property & Purchase',
-    subtitle: 'What are you buying?',
+    title: 'Purchase',
+    subtitle: 'Property details and acquisition costs',
     icon: <Home className="w-5 h-5" />,
   },
   {
     id: 'rehab',
-    title: 'Rehab Budget',
-    subtitle: 'What will the renovation cost?',
+    title: 'Rehab & ARV',
+    subtitle: 'Renovation scope and target sale price',
     icon: <Hammer className="w-5 h-5" />,
   },
   {
@@ -423,15 +423,6 @@ function StepProperty({
         step={5000}
         tooltip="What you're paying for the property"
       />
-      <SliderInput
-        label="After Repair Value (ARV)"
-        value={inputs.arv}
-        onChange={(v) => setInput('arv', v)}
-        min={0}
-        max={3000000}
-        step={5000}
-        tooltip="Estimated sale price after rehab"
-      />
       <div className="grid grid-cols-2 gap-4">
         <SliderInput
           label="Closing Costs"
@@ -471,6 +462,15 @@ function StepRehab({
         max={500000}
         step={1000}
         tooltip="Total renovation cost before contingency"
+      />
+      <SliderInput
+        label="After Repair Value (ARV)"
+        value={inputs.arv}
+        onChange={(v) => setInput('arv', v)}
+        min={0}
+        max={3000000}
+        step={5000}
+        tooltip="Estimated sale price after rehab"
       />
       <div className="grid grid-cols-2 gap-4">
         <SliderInput
@@ -562,17 +562,17 @@ function StepFinancing({
               />
             </div>
           )}
+          <SliderInput
+            label="Interest Rate"
+            value={inputs.interestRatePct}
+            onChange={(v) => setInput('interestRatePct', v)}
+            min={0}
+            max={20}
+            step={0.25}
+            prefix="%"
+            tooltip="Annual interest rate"
+          />
           <div className="grid grid-cols-2 gap-4">
-            <SliderInput
-              label="Interest Rate"
-              value={inputs.interestRatePct}
-              onChange={(v) => setInput('interestRatePct', v)}
-              min={0}
-              max={20}
-              step={0.25}
-              prefix="%"
-              tooltip="Annual interest rate"
-            />
             <SliderInput
               label="Origination Points"
               value={inputs.originationPointsPct}
@@ -581,18 +581,21 @@ function StepFinancing({
               max={5}
               step={0.25}
               prefix="%"
-              tooltip="1 point = 1% of loan"
+              tooltip="Points charged on loan amount"
+            />
+            <SliderInput
+              label="Lender Fees"
+              value={inputs.lenderFlatFees}
+              onChange={(v) => setInput('lenderFlatFees', v)}
+              min={0}
+              max={10000}
+              step={100}
+              tooltip="Flat processing / underwriting"
             />
           </div>
-          <SliderInput
-            label="Lender Flat Fees"
-            value={inputs.lenderFlatFees}
-            onChange={(v) => setInput('lenderFlatFees', v)}
-            min={0}
-            max={10000}
-            step={100}
-            tooltip="Processing, underwriting, etc."
-          />
+          <p className="text-[10px] text-calc-muted/50 -mt-2">
+            Note: Some lenders charge points, others charge flat fees — enter whichever applies.
+          </p>
         </>
       )}
       <SliderInput
