@@ -118,8 +118,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
-              { value: "$50M+", label: "Funded", icon: TrendingUp },
-              { value: "100+", label: "Deals Closed", icon: CheckCircle },
+              { value: "$500M+", label: "Closed", icon: TrendingUp },
+              { value: "500+", label: "Deals Done", icon: CheckCircle },
               { value: "7–14 Days", label: "Typical Close", icon: Clock },
               { value: "15+ Years", label: "In the Market", icon: MapPin },
             ].map((stat) => (
