@@ -163,11 +163,7 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} Shepherd Mortgage. All rights
                 reserved.
               </p>
-              {/* TODO: Replace XXXXXX with real NMLS number */}
-              <p className="text-xs text-white/15 mt-1">
-                Loans made or arranged pursuant to a California Financing Law
-                License. NMLS #XXXXXX.
-              </p>
+
             </div>
             <div className="flex items-center gap-6">
               <Link
