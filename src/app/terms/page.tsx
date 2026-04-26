@@ -1,5 +1,4 @@
-import Link from "next/link";
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
@@ -11,35 +10,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="Shepherd Mortgage"
-              width={280}
-              height={84}
-              className="h-16 w-auto"
-              priority
-            />
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/calculator"
-              className="text-sm font-medium text-text-secondary hover:text-navy transition-colors"
-            >
-              Calculator
-            </Link>
-            <Link
-              href="/apply"
-              className="text-sm font-medium bg-navy text-white px-5 py-2.5 rounded-lg hover:bg-navy-light transition-colors"
-            >
-              Apply Now
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Header */}
       <div className="bg-gradient-to-r from-navy to-navy-light py-12">

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   ArrowRight,
@@ -15,6 +15,7 @@ import {
   MessageSquareQuote,
   Briefcase,
 } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import LoanRequestForm from "@/components/LoanRequestForm";
 import GoogleReviews from "@/components/GoogleReviews";
 import Footer from "@/components/Footer";
@@ -25,47 +26,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           Navigation
          ═══════════════════════════════════════ */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-          <a href="#" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="Shepherd Mortgage"
-              width={400}
-              height={120}
-              className="h-20 w-auto"
-              priority
-            />
-          </a>
-          <div className="hidden sm:flex items-center gap-6">
-            <a
-              href="#about"
-              className="text-sm font-medium text-text-secondary hover:text-navy transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#specialties"
-              className="text-sm font-medium text-text-secondary hover:text-navy transition-colors"
-            >
-              Specialties
-            </a>
-            <a
-              href="#request"
-              className="text-sm font-medium bg-navy text-white px-5 py-2.5 rounded-lg hover:bg-navy-light transition-colors"
-            >
-              Request a Loan
-            </a>
-          </div>
-          {/* Mobile CTA */}
-          <a
-            href="#request"
-            className="sm:hidden text-sm font-medium bg-navy text-white px-4 py-2 rounded-lg"
-          >
-            Request a Loan
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* ═══════════════════════════════════════
           Hero
@@ -80,12 +41,12 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-6">
               <MapPin className="w-3.5 h-3.5 text-white/70" />
               <span className="text-white/90 text-sm font-medium tracking-wide">
-                Nationwide Investment Property Lending
+                Investment Property Mortgage Brokerage
               </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
-              A lender who moves as fast as{' '}
+              A mortgage broker who moves as fast as{' '}
               <span className="bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] bg-clip-text text-transparent">your deal.</span>
             </h1>
 
@@ -188,7 +149,7 @@ export default function HomePage() {
                 When I say I can close, I close.
               </p>
             </div>
-            <div className="mt-10">
+            <div className="mt-10 flex flex-col sm:flex-row items-start gap-4">
               <a
                 href="#request"
                 className="inline-flex items-center justify-center gap-2 bg-navy text-white font-semibold px-8 py-4 rounded-xl hover:bg-navy-light transition-all text-lg"
@@ -196,6 +157,12 @@ export default function HomePage() {
                 Request a Loan
                 <ArrowRight className="w-5 h-5" />
               </a>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center gap-2 text-navy font-semibold px-8 py-4 rounded-xl border border-border hover:bg-surface-tertiary transition-all text-lg"
+              >
+                Learn More About Us
+              </Link>
             </div>
           </div>
         </div>
@@ -321,7 +288,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
             <a
               href="#request"
               className="inline-flex items-center justify-center gap-2 bg-navy text-white font-semibold px-8 py-4 rounded-xl hover:bg-navy-light transition-all text-lg"
@@ -329,6 +296,12 @@ export default function HomePage() {
               Request a Loan
               <ArrowRight className="w-5 h-5" />
             </a>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 text-navy font-semibold px-8 py-4 rounded-xl border border-border hover:bg-surface-tertiary transition-all text-lg"
+            >
+              View All Services
+            </Link>
           </div>
         </div>
       </section>

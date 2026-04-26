@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-navy-dark py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top row: Logo + Contact + Links */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div>
             <Image
@@ -18,7 +18,7 @@ export default function Footer() {
               className="h-8 w-auto brightness-0 invert mb-4"
             />
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
-              Investment Property Lending for California Real Estate Investors
+              Nationwide Investment Property Lending for Real Estate Investors
             </p>
           </div>
 
@@ -62,31 +62,56 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Company Links */}
           <div>
             <h4 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">
-              Quick Links
+              Company
             </h4>
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="#about"
+                  href="/about"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  About
+                  About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#specialties"
+                  href="/services"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
-                  Specialties
+                  Lending Services
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#request"
+                  href="/contact"
+                  className="text-sm text-white/40 hover:text-white/70 transition-colors"
+                >
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/faq"
+                  className="text-sm text-white/40 hover:text-white/70 transition-colors"
+                >
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources Links */}
+          <div>
+            <h4 className="text-sm font-semibold text-white/70 uppercase tracking-wider mb-4">
+              Resources
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/#request"
                   className="text-sm text-white/40 hover:text-white/70 transition-colors"
                 >
                   Request a Loan
@@ -130,7 +155,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Divider */}
+        {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
@@ -138,6 +163,7 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} Shepherd Mortgage. All rights
                 reserved.
               </p>
+              {/* TODO: Replace XXXXXX with real NMLS number */}
               <p className="text-xs text-white/15 mt-1">
                 Loans made or arranged pursuant to a California Financing Law
                 License. NMLS #XXXXXX.

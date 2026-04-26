@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Sans, Outfit } from "next/font/google";
-import ChatWidget from "@/components/ChatWidget";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -16,17 +15,19 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Shepherd Mortgage | Nationwide Investment Property Lending",
+  title: "Shepherd Mortgage | Investment Property Mortgage Brokerage",
   description:
-    "Bridge, fix and flip, ground-up construction, and long-term rental financing for California real estate investors. Direct access. Real answers. Fewer surprises.",
+    "Shepherd Mortgage is an investment property mortgage brokerage specializing in bridge, fix-and-flip, ground-up construction, and DSCR rental financing for real estate investors nationwide. Direct access. Real answers. Fewer surprises.",
   keywords: [
-    "California investment property lending",
+    "investment property mortgage broker",
+    "investment property mortgage brokerage",
     "bridge loans",
     "fix and flip loans",
     "DSCR rental loans",
     "construction loans",
     "hard money lending",
     "real estate investing",
+    "mortgage broker for investors",
   ],
 };
 
@@ -39,7 +40,6 @@ export default function RootLayout({
     <html lang="en" className={`${dmSans.variable} ${outfit.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         {children}
-        <ChatWidget />
         <script src="https://link.msgsndr.com/js/form_embed.js" defer />
       </body>
     </html>
