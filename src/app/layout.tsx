@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Shepherd Mortgage | Investment Property Mortgage Brokerage",
+  title: "Shepherd Mortgage | Investment Property Financing Advisory",
   description:
     "Shepherd Mortgage is an investment property mortgage brokerage specializing in bridge, fix-and-flip, ground-up construction, and DSCR rental financing for real estate investors nationwide. Direct access. Real answers. Fewer surprises.",
   keywords: [

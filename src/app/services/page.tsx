@@ -16,7 +16,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Investment Property Lending Services | Shepherd Mortgage Brokerage",
+  title: "Investment Property Lending Services | Shepherd Mortgage Advisory",
   description:
     "Shepherd Mortgage is an investment property mortgage brokerage offering bridge loans, fix-and-flip financing, ground-up construction, 30-year investor loans, and DSCR rental programs.",
 };

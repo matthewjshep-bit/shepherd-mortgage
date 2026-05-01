@@ -16,7 +16,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "About Us | Shepherd Mortgage — Investment Property Mortgage Brokerage",
+  title: "About Us | Shepherd Mortgage — Investment Property Financing Advisory",
   description:
     "Shepherd Mortgage is an investment property mortgage brokerage led by Daniel Shepherd — 15+ years of experience, $500M+ closed, and a direct-access approach to bridge, fix-and-flip, and rental financing.",
 };

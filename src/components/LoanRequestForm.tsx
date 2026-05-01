@@ -14,6 +14,7 @@ import {
   Banknote,
   HardHat,
   Wrench,
+  PackagePlus,
   CheckCircle,
 } from 'lucide-react';
 
@@ -38,6 +39,7 @@ const propertyTypes: CardOption[] = [
 
 const loanPurposes: CardOption[] = [
   { label: 'Purchase', icon: ShoppingCart, value: 'purchase' },
+  { label: 'Purchase + Rehab', icon: PackagePlus, value: 'purchase-rehab' },
   { label: 'Refinance', icon: RefreshCw, value: 'refinance' },
   { label: 'Cash-Out Refi', icon: Banknote, value: 'cash-out' },
   { label: 'Construction', icon: HardHat, value: 'construction' },
