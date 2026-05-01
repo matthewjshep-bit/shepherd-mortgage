@@ -19,7 +19,7 @@ export default function TermsPage() {
             Terms of Service
           </h1>
           <p className="text-white/50 text-sm mt-2">
-            Last updated: April 21, 2026
+            Last updated: April 30, 2026
           </p>
         </div>
       </div>
@@ -43,18 +43,24 @@ export default function TermsPage() {
               </p>
             </section>
 
+            {/* §2 — rewritten for B2B / business-purpose positioning */}
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
                 2. Description of Services
               </h2>
               <p className="text-text-secondary leading-relaxed">
-                Shepherd Mortgage provides information about hard money lending,
-                fix-and-flip bridge loans, and related financial products. The
-                Site includes a loan calculator for estimating deal economics and
-                an online loan application portal. All tools and estimates
-                provided on this Site are for informational purposes only and do
-                not constitute a commitment to lend, a loan approval, or a
-                binding offer of any kind.
+                Shepherd Mortgage is a commercial real estate financing advisory
+                that arranges business-purpose investment property loans for
+                real estate investors and developers, including bridge loans,
+                fix-and-flip financing, ground-up construction, DSCR rental
+                loans, and 30-year investor financing. Our services are limited
+                to business-purpose lending; we do not originate
+                consumer-purpose or owner-occupied residential mortgages. The
+                Site includes informational content, a deal calculator, and an
+                online inquiry form for prospective clients. All tools,
+                estimates, and informational content on this Site are for
+                informational purposes only and do not constitute a commitment
+                to lend, a loan approval, or a binding offer of any kind.
               </p>
             </section>
 
@@ -87,9 +93,72 @@ export default function TermsPage() {
               </p>
             </section>
 
+            {/* §5 — NEW SMS section — required for A2P compliance */}
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                5. User Conduct
+                5. SMS / Text Messaging Program
+              </h2>
+              <div className="text-text-secondary leading-relaxed space-y-4">
+                <p>
+                  <strong className="text-text-primary">
+                    Program Description.
+                  </strong>{" "}
+                  Shepherd Mortgage operates an SMS text messaging program for
+                  the purpose of sending transactional and customer-service
+                  messages to clients and prospects who have submitted a loan
+                  inquiry through our website and explicitly opted in via a
+                  consent checkbox.
+                </p>
+                <p>
+                  <strong className="text-text-primary">Message Types.</strong>{" "}
+                  Messages may include: confirmation of inquiry receipt,
+                  appointment confirmations and reminders, document requests,
+                  deal status and closing coordination updates, and replies to
+                  client-initiated questions. We do not send promotional,
+                  marketing, or rate-related messages via SMS.
+                </p>
+                <p>
+                  <strong className="text-text-primary">
+                    How to Opt Out.
+                  </strong>{" "}
+                  You may opt out of the SMS program at any time by replying{" "}
+                  <strong>STOP</strong> to any message you receive. After opting
+                  out, you will receive one confirmation message and no further
+                  messages will be sent. To rejoin, reply <strong>START</strong>{" "}
+                  or submit a new inquiry through our website.
+                </p>
+                <p>
+                  <strong className="text-text-primary">
+                    How to Get Help.
+                  </strong>{" "}
+                  Reply <strong>HELP</strong> to any message for assistance, or
+                  contact our support team directly:
+                </p>
+                <ul className="list-disc list-inside space-y-1 ml-2">
+                  <li>
+                    Email:{" "}
+                    <a
+                      href="mailto:dan@shepmo.com"
+                      className="text-navy font-medium hover:underline"
+                    >
+                      dan@shepmo.com
+                    </a>
+                  </li>
+                  <li>Phone: 408.821.8245</li>
+                  <li>Hours: Monday – Friday, 8:00 AM – 6:00 PM PT</li>
+                </ul>
+                <p>
+                  <strong className="text-text-primary">Costs.</strong> Message
+                  and data rates may apply based on your mobile carrier plan.
+                  Message frequency varies based on the status of your inquiry.
+                  Carriers are not liable for delayed or undelivered messages.
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-navy mb-3">
+                6. User Conduct
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 You agree not to: (a) use the Site for any unlawful purpose;
@@ -103,7 +172,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                6. Intellectual Property
+                7. Intellectual Property
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 All content on this Site, including but not limited to text,
@@ -118,7 +187,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                7. Disclaimer of Warranties
+                8. Disclaimer of Warranties
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 The Site and all information, content, and services provided are
@@ -134,7 +203,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                8. Limitation of Liability
+                9. Limitation of Liability
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 To the fullest extent permitted by law, Shepherd Mortgage and
@@ -149,29 +218,29 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                9. Governing Law
+                10. Governing Law
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 These Terms shall be governed by and construed in accordance
-                with the laws of the State of Texas, without regard to its
+                with the laws of the State of California, without regard to its
                 conflict of law provisions. Any legal action or proceeding
                 arising under these Terms shall be brought exclusively in the
-                courts located in Dallas County, Texas.
+                courts located in Santa Clara County, California.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                10. Contact Information
+                11. Contact Information
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 If you have any questions about these Terms of Service, please
                 contact us at:{" "}
                 <a
-                  href="mailto:info@shepherdmortgage.com"
+                  href="mailto:dan@shepmo.com"
                   className="text-navy font-medium hover:underline"
                 >
-                  info@shepherdmortgage.com
+                  dan@shepmo.com
                 </a>
               </p>
             </section>

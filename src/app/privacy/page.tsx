@@ -19,7 +19,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-white/50 text-sm mt-2">
-            Last updated: April 21, 2026
+            Last updated: April 30, 2026
           </p>
         </div>
       </div>
@@ -175,9 +175,76 @@ export default function PrivacyPage() {
               </p>
             </section>
 
+            {/* §7 — NEW SMS section — required for A2P compliance */}
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                7. Your Rights
+                7. SMS / Text Messaging Program
+              </h2>
+              <div className="text-text-secondary leading-relaxed space-y-4">
+                <p>
+                  <strong className="text-text-primary">Opt-In.</strong> We
+                  send SMS text messages only to individuals who have explicitly
+                  opted in by checking the SMS consent checkbox on a form on our
+                  website (e.g., the contact form at /contact) and providing
+                  their mobile phone number. Opt-in is never assumed and is not
+                  a condition of any service.
+                </p>
+                <p>
+                  <strong className="text-text-primary">
+                    Types of Messages.
+                  </strong>{" "}
+                  Messages are limited to transactional and customer-service
+                  communications related to your loan inquiry, including:
+                  confirmation of inquiry receipt, appointment confirmations and
+                  reminders, document requests for in-progress underwriting,
+                  deal status and closing coordination updates, and responses to
+                  client-initiated questions. We do not send promotional,
+                  marketing, or rate-related SMS messages.
+                </p>
+                <p>
+                  <strong className="text-text-primary">
+                    Frequency and Costs.
+                  </strong>{" "}
+                  Message frequency varies based on the status of your inquiry.
+                  Message and data rates may apply, depending on your mobile
+                  carrier plan.
+                </p>
+                <p>
+                  <strong className="text-text-primary">Opt-Out.</strong> You
+                  can opt out at any time by replying STOP to any message you
+                  receive from us. After opting out, you will receive a
+                  confirmation message and no further SMS messages will be sent.
+                  Reply HELP for help, or contact us directly at{" "}
+                  <a
+                    href="mailto:dan@shepmo.com"
+                    className="text-navy font-medium hover:underline"
+                  >
+                    dan@shepmo.com
+                  </a>{" "}
+                  or 408.821.8245.
+                </p>
+                <p>
+                  <strong className="text-text-primary">
+                    No Sharing of Mobile Information.
+                  </strong>{" "}
+                  We do not share, sell, rent, or otherwise disclose mobile
+                  phone numbers or SMS opt-in consent information to third
+                  parties or affiliates for marketing or promotional purposes.
+                  Mobile information may be shared only with subprocessors
+                  necessary to deliver the SMS service itself (e.g., our
+                  messaging platform), and only for the purpose of delivering
+                  messages you have consented to receive.
+                </p>
+                <p>
+                  <strong className="text-text-primary">Carriers.</strong>{" "}
+                  Carriers are not liable for delayed or undelivered messages.
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-navy mb-3">
+                8. Your Rights
               </h2>
               <p className="text-text-secondary leading-relaxed mb-3">
                 Depending on your jurisdiction, you may have the right to:
@@ -199,10 +266,10 @@ export default function PrivacyPage() {
               <p className="text-text-secondary leading-relaxed mt-3">
                 To exercise any of these rights, please contact us at{" "}
                 <a
-                  href="mailto:info@shepherdmortgage.com"
+                  href="mailto:dan@shepmo.com"
                   className="text-navy font-medium hover:underline"
                 >
-                  info@shepherdmortgage.com
+                  dan@shepmo.com
                 </a>
                 .
               </p>
@@ -210,7 +277,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                8. Data Retention
+                9. Data Retention
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 We retain your personal information for as long as necessary to
@@ -223,7 +290,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                9. Third-Party Links
+                10. Third-Party Links
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 Our Site may contain links to third-party websites. We are not
@@ -235,7 +302,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                10. Children&apos;s Privacy
+                11. Children&apos;s Privacy
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 Our Site and services are not directed at individuals under the
@@ -248,7 +315,7 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                11. Changes to This Policy
+                12. Changes to This Policy
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 We may update this Privacy Policy from time to time. Any changes
@@ -260,16 +327,16 @@ export default function PrivacyPage() {
 
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
-                12. Contact Us
+                13. Contact Us
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 If you have any questions or concerns about this Privacy Policy
                 or our data practices, please contact us at:{" "}
                 <a
-                  href="mailto:info@shepherdmortgage.com"
+                  href="mailto:dan@shepmo.com"
                   className="text-navy font-medium hover:underline"
                 >
-                  info@shepherdmortgage.com
+                  dan@shepmo.com
                 </a>
               </p>
             </section>
