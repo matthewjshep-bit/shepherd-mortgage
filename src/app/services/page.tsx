@@ -133,7 +133,48 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">Transparent Pricing & Fees</h2>
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto">No hidden junk fees. No upfront application costs. We believe in clear, upfront terms.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-surface-secondary rounded-2xl p-8 border border-border">
+                <h3 className="text-xl font-bold text-navy mb-4">Interest Rates</h3>
+                <p className="text-text-secondary mb-4 leading-relaxed">Rates are dependent on experience, leverage, and project scope.</p>
+                <ul className="space-y-3">
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Bridge & Fix/Flip</span><span className="text-sm font-bold text-accent-green">9.5% – 12%</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Construction</span><span className="text-sm font-bold text-accent-green">10% – 12.5%</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">DSCR & 30-Year</span><span className="text-sm font-bold text-accent-green">Market Rates</span></li>
+                </ul>
+              </div>
+              
+              <div className="bg-surface-secondary rounded-2xl p-8 border border-border">
+                <h3 className="text-xl font-bold text-navy mb-4">Origination Fees</h3>
+                <p className="text-text-secondary mb-4 leading-relaxed">Charged only at closing. Varies based on loan size and complexity.</p>
+                <ul className="space-y-3">
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Standard Origination</span><span className="text-sm font-bold text-accent-green">1.5 – 3.0 Pts</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Application Fee</span><span className="text-sm font-bold text-accent-green">$0</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Underwriting Fee</span><span className="text-sm font-bold text-accent-green">$995 - $1,495</span></li>
+                </ul>
+              </div>
+
+              <div className="bg-surface-secondary rounded-2xl p-8 border border-border">
+                <h3 className="text-xl font-bold text-navy mb-4">Third-Party Costs</h3>
+                <p className="text-text-secondary mb-4 leading-relaxed">You pay actual third-party costs directly, with no markup from us.</p>
+                <ul className="space-y-3">
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Appraisal / Valuation</span><span className="text-sm font-bold text-navy">At Cost</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Title & Escrow</span><span className="text-sm font-bold text-navy">At Cost</span></li>
+                  <li className="flex items-center justify-between"><span className="text-sm font-medium text-navy">Legal / Doc Prep</span><span className="text-sm font-bold text-navy">At Cost</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-surface-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">How It Works</h2>

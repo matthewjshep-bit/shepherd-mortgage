@@ -31,7 +31,16 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════
           Hero
          ═══════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-light to-charcoal">
+      <section className="relative overflow-hidden bg-navy">
+        {/* Background Image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img 
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+          alt="Modern commercial building" 
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/90 via-navy-light/80 to-charcoal/90 mix-blend-multiply" />
+
         {/* Subtle decorative orb */}
         <div className="absolute top-20 -right-32 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
@@ -41,12 +50,12 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-4 py-1.5 mb-6">
               <MapPin className="w-3.5 h-3.5 text-white/70" />
               <span className="text-white/90 text-sm font-medium tracking-wide">
-                Investment Property Mortgage Brokerage
+                Investment Property Financing Advisory
               </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
-              A mortgage broker who moves as fast as{' '}
+              Investment property financing that moves as fast as{' '}
               <span className="bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] bg-clip-text text-transparent">your deal.</span>
             </h1>
 
@@ -129,6 +138,33 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════
+          Trust / Affiliations
+         ═══════════════════════════════════════ */}
+      <section className="py-12 bg-surface-secondary border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-semibold text-text-tertiary uppercase tracking-widest mb-8">Trusted By & Affiliated With</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex items-center gap-2">
+              <Shield className="w-8 h-8 text-navy" />
+              <span className="text-xl font-bold text-navy tracking-tight">NMLS Approved</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Landmark className="w-8 h-8 text-navy" />
+              <span className="text-xl font-bold text-navy tracking-tight">Equal Housing Lender</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-8 h-8 text-navy" />
+              <span className="text-xl font-bold text-navy tracking-tight">California DRE</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-8 h-8 text-navy" />
+              <span className="text-xl font-bold text-navy tracking-tight">BBB Accredited</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
           About
          ═══════════════════════════════════════ */}
       <section id="about" className="py-24 bg-surface-secondary scroll-mt-24">
@@ -173,41 +209,52 @@ export default function HomePage() {
          ═══════════════════════════════════════ */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-10">
-              Why Borrowers Call Me Back
-            </h2>
-            <div className="space-y-5">
-              {[
-                {
-                  icon: Phone,
-                  text: "Direct line. No intake reps.",
-                },
-                {
-                  icon: MessageSquareQuote,
-                  text: "Honest feedback before you waste a week.",
-                },
-                {
-                  icon: TrendingUp,
-                  text: "Structure matched to your exit.",
-                },
-                {
-                  icon: Shield,
-                  text: "Clean execution from term sheet to wire.",
-                },
-              ].map((item) => (
-                <div
-                  key={item.text}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-surface-secondary border border-border"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
-                    <item.icon className="w-5 h-5 text-navy" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-10">
+                Why Borrowers Call Me Back
+              </h2>
+              <div className="space-y-5">
+                {[
+                  {
+                    icon: Phone,
+                    text: "Direct line. No intake reps.",
+                  },
+                  {
+                    icon: MessageSquareQuote,
+                    text: "Honest feedback before you waste a week.",
+                  },
+                  {
+                    icon: TrendingUp,
+                    text: "Structure matched to your exit.",
+                  },
+                  {
+                    icon: Shield,
+                    text: "Clean execution from term sheet to wire.",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.text}
+                    className="flex items-start gap-4 p-4 rounded-xl bg-surface-secondary border border-border"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                      <item.icon className="w-5 h-5 text-navy" />
+                    </div>
+                    <p className="text-text-primary font-medium text-lg pt-1.5">
+                      {item.text}
+                    </p>
                   </div>
-                  <p className="text-text-primary font-medium text-lg pt-1.5">
-                    {item.text}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+            <div className="relative rounded-3xl overflow-hidden h-full min-h-[400px] border border-border shadow-lg">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="https://images.unsplash.com/photo-1541888081622-1dcaef16f393?q=80&w=1200&auto=format&fit=crop" 
+                alt="Construction site planning" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-navy/10"></div>
             </div>
           </div>
         </div>

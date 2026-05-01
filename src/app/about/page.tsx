@@ -160,9 +160,17 @@ export default function AboutPage() {
                 {/* Contact Card */}
                 <div className="lg:col-span-2 order-1 lg:order-2">
                   <div className="bg-white rounded-2xl p-8 border border-border shadow-sm">
-                    {/* TODO: Replace with real professional headshot */}
-                    <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-navy to-navy-light flex items-center justify-center mx-auto mb-6">
-                      <span className="text-4xl font-bold text-white">DS</span>
+                    {/* 
+                      TODO: Replace this URL with Daniel Shepherd's actual professional headshot.
+                      For best results, use a square image (1:1 ratio) or it will be cropped by object-cover.
+                    */}
+                    <div className="w-32 h-32 rounded-2xl mx-auto mb-6 overflow-hidden border border-border shadow-sm bg-surface-secondary">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img 
+                        src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop" 
+                        alt="Daniel Shepherd - Principal" 
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                      />
                     </div>
                     <h3 className="text-xl font-semibold text-navy text-center mb-1">
                       Daniel Shepherd
