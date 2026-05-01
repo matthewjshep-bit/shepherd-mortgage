@@ -152,6 +152,15 @@ export default function TermsPage() {
                   and data rates may apply based on your mobile carrier plan.
                   Message frequency varies based on the status of your inquiry.
                   Carriers are not liable for delayed or undelivered messages.
+                  For full details on how we handle your data and mobile
+                  information, please review our{" "}
+                  <a
+                    href="/privacy"
+                    className="text-navy font-medium hover:underline"
+                  >
+                    Privacy Policy
+                  </a>
+                  .
                 </p>
               </div>
             </section>

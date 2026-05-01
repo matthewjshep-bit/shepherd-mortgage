@@ -59,6 +59,32 @@ export default function ContactPage() {
                     title="Shepherd Mortgage"
                   />
                 </div>
+
+                {/* SMS consent disclosure — visible to compliance scanners */}
+                <div className="mt-6 bg-surface-secondary rounded-xl p-4 border border-border">
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    By submitting this form and checking the SMS consent box, you agree to receive
+                    transactional and customer-service SMS messages and phone calls from Shepherd
+                    Mortgage related to your loan inquiry — including deal status updates, document
+                    requests, appointment confirmations, and closing coordination. Msg &amp; data
+                    rates may apply. Msg frequency varies. Reply STOP to opt out at any time,
+                    HELP for help. You must be 18 or older to opt in. View our{' '}
+                    <a
+                      href="/privacy"
+                      className="text-navy font-medium underline underline-offset-2 hover:text-navy-light"
+                    >
+                      Privacy Policy
+                    </a>
+                    {' '}and{' '}
+                    <a
+                      href="/terms"
+                      className="text-navy font-medium underline underline-offset-2 hover:text-navy-light"
+                    >
+                      Terms of Service
+                    </a>
+                    .
+                  </p>
+                </div>
               </div>
             </div>
 
