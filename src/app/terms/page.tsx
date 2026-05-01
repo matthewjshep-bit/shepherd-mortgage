@@ -93,7 +93,7 @@ export default function TermsPage() {
               </p>
             </section>
 
-            {/* §5 — NEW SMS section — required for A2P compliance */}
+            {/* §5 — SMS section — required for A2P compliance */}
             <section>
               <h2 className="text-xl font-semibold text-navy mb-3">
                 5. SMS / Text Messaging Program
@@ -107,7 +107,8 @@ export default function TermsPage() {
                   the purpose of sending transactional and customer-service
                   messages to clients and prospects who have submitted a loan
                   inquiry through our website and explicitly opted in via a
-                  consent checkbox.
+                  consent checkbox. Participants must be at least 18 years of
+                  age to enroll in the SMS program.
                 </p>
                 <p>
                   <strong className="text-text-primary">Message Types.</strong>{" "}
@@ -148,19 +149,26 @@ export default function TermsPage() {
                   <li>Hours: Monday – Friday, 8:00 AM – 6:00 PM PT</li>
                 </ul>
                 <p>
-                  <strong className="text-text-primary">Costs.</strong> Message
-                  and data rates may apply based on your mobile carrier plan.
-                  Message frequency varies based on the status of your inquiry.
-                  Carriers are not liable for delayed or undelivered messages.
-                  For full details on how we handle your data and mobile
-                  information, please review our{" "}
+                  <strong className="text-text-primary">
+                    Costs and Carrier Disclaimers.
+                  </strong>{" "}
+                  Message and data rates may apply based on your mobile carrier
+                  plan. Message frequency varies based on the status of your
+                  inquiry. Carriers are not liable for delayed or undelivered
+                  messages.
+                </p>
+                <p>
+                  <strong className="text-text-primary">Privacy.</strong> Your
+                  phone number and SMS opt-in consent will be handled in
+                  accordance with our{" "}
                   <a
                     href="/privacy"
                     className="text-navy font-medium hover:underline"
                   >
                     Privacy Policy
                   </a>
-                  .
+                  . We do not share, sell, or rent mobile phone numbers or SMS
+                  opt-in information to third parties for marketing purposes.
                 </p>
               </div>
             </section>
