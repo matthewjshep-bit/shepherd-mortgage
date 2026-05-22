@@ -61,7 +61,7 @@ export default function KeyCalculations({ results }: { results: DealResults }) {
   const [hoveredRow, setHoveredRow] = useState<string | null>(null);
 
   return (
-    <div className="bg-calc-surface border border-calc-border rounded-xl overflow-hidden">
+    <div className="calc-card overflow-hidden">
       <div className="px-4 py-3 border-b border-calc-border">
         <h3 className="text-sm font-semibold text-calc-heading tracking-tight">
           Key Calculations

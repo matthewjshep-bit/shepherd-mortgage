@@ -63,7 +63,7 @@ export default function HeroMetrics({ results }: { results: DealResults }) {
   return (
     <div className="grid grid-cols-3 gap-3">
       {/* Net Profit */}
-      <div className="bg-calc-surface border border-calc-border rounded-xl p-4 flex flex-col">
+      <div className="calc-card p-5 flex flex-col">
         <span className="text-[11px] font-medium text-calc-muted uppercase tracking-wider mb-1">
           Net Profit
         </span>
@@ -79,7 +79,7 @@ export default function HeroMetrics({ results }: { results: DealResults }) {
       </div>
 
       {/* ROI */}
-      <div className="bg-calc-surface border border-calc-border rounded-xl p-4 flex flex-col">
+      <div className="calc-card p-5 flex flex-col">
         <span className="text-[11px] font-medium text-calc-muted uppercase tracking-wider mb-1">
           Return on Cash
         </span>
@@ -97,7 +97,7 @@ export default function HeroMetrics({ results }: { results: DealResults }) {
       </div>
 
       {/* Deal Grade */}
-      <div className="bg-calc-surface border border-calc-border rounded-xl p-4 flex flex-col items-center justify-center">
+      <div className="calc-card p-5 flex flex-col items-center justify-center">
         <span className="text-[11px] font-medium text-calc-muted uppercase tracking-wider mb-2">
           Deal Grade
         </span>

@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 import type { DealResults } from '@/lib/flip-calculator/engine';
 
-const COLORS = ['#6366F1', '#F59E0B', '#10B981', '#F43F5E', '#8B5CF6'];
+const COLORS = ['#4F46E5', '#D97706', '#059669', '#DC2626', '#7C3AED'];
 
 function fmt(n: number): string {
   return `$${Math.round(n).toLocaleString()}`;
@@ -27,7 +27,7 @@ export default function DonutChart({ results }: { results: DealResults }) {
   const total = data.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <div className="bg-calc-surface border border-calc-border rounded-xl p-4">
+    <div className="calc-card p-5">
       <h3 className="text-sm font-semibold text-calc-heading tracking-tight mb-4">
         Cost Breakdown
       </h3>
@@ -52,11 +52,12 @@ export default function DonutChart({ results }: { results: DealResults }) {
               <Tooltip
                 formatter={(value) => [fmt(Number(value)), 'Cost']}
                 contentStyle={{
-                  background: '#111624',
-                  border: '1px solid #1F2937',
+                  background: '#FFFFFF',
+                  border: '1px solid #E7E5E0',
                   borderRadius: '8px',
                   fontSize: '12px',
-                  color: '#E5E7EB',
+                  color: '#0F172A',
+                  boxShadow: '0 4px 12px rgba(15,23,42,0.08)',
                 }}
               />
             </PieChart>

@@ -6,52 +6,75 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Dark mode (default) */
-  --color-calc-bg: #0A0E1A;
-  --color-calc-surface: #111624;
-  --color-calc-surface-hover: #171d30;
-  --color-calc-border: #1F2937;
+  /* Light mode (default) */
+  --color-calc-bg: #FAFAF7;
+  --color-calc-surface: #FFFFFF;
+  --color-calc-surface-hover: #F5F5F2;
+  --color-calc-border: #E7E5E0;
   --color-calc-border-focus: #6366F1;
-  --color-calc-text: #E5E7EB;
-  --color-calc-muted: #9CA3AF;
-  --color-calc-heading: #F9FAFB;
+  --color-calc-text: #1E293B;
+  --color-calc-muted: #64748B;
+  --color-calc-heading: #0F172A;
 
   /* Semantic */
-  --color-calc-profit: #10B981;
-  --color-calc-profit-bg: rgba(16, 185, 129, 0.1);
-  --color-calc-warning: #F59E0B;
-  --color-calc-warning-bg: rgba(245, 158, 11, 0.1);
-  --color-calc-loss: #F43F5E;
-  --color-calc-loss-bg: rgba(244, 63, 94, 0.1);
-  --color-calc-accent: #6366F1;
-  --color-calc-accent-bg: rgba(99, 102, 241, 0.1);
+  --color-calc-profit: #059669;
+  --color-calc-profit-bg: rgba(5, 150, 105, 0.08);
+  --color-calc-warning: #D97706;
+  --color-calc-warning-bg: rgba(217, 119, 6, 0.08);
+  --color-calc-loss: #DC2626;
+  --color-calc-loss-bg: rgba(220, 38, 38, 0.08);
+  --color-calc-accent: #4F46E5;
+  --color-calc-accent-bg: rgba(79, 70, 229, 0.08);
 
-  /* Light mode overrides */
-  --color-calc-light-bg: #FAFAF7;
-  --color-calc-light-surface: #FFFFFF;
-  --color-calc-light-surface-hover: #F5F5F5;
-  --color-calc-light-border: #E5E7EB;
-  --color-calc-light-text: #0F172A;
-  --color-calc-light-muted: #64748B;
-  --color-calc-light-heading: #0F172A;
+  /* Dark mode (opt-in via .calc-dark) */
+  --color-calc-dark-bg: #0A0E1A;
+  --color-calc-dark-surface: #111624;
+  --color-calc-dark-surface-hover: #171d30;
+  --color-calc-dark-border: #1F2937;
+  --color-calc-dark-text: #E5E7EB;
+  --color-calc-dark-muted: #9CA3AF;
+  --color-calc-dark-heading: #F9FAFB;
+}
+
+/* ── Calculator container — soft ambient gradient ── */
+.calc-container {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79, 70, 229, 0.06), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(217, 119, 6, 0.04), transparent 60%),
+    var(--color-calc-bg);
+  background-attachment: fixed;
 }
 
 /* ── Scrollbar ── */
 .calc-container ::-webkit-scrollbar { width: 6px; height: 6px; }
 .calc-container ::-webkit-scrollbar-track { background: transparent; }
-.calc-container ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
-.calc-container ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
-
-/* ── Light mode scrollbar ── */
-.calc-light ::-webkit-scrollbar-thumb { background: #D1D5DB; }
-.calc-light ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+.calc-container ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+.calc-container ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
 
 /* ── Tabular nums for financial data ── */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* ── Input shake animation ── */
+/* ── Premium card styling ── */
+.calc-card {
+  background: var(--color-calc-surface);
+  border: 1px solid var(--color-calc-border);
+  border-radius: 1rem;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px rgba(15, 23, 42, 0.03);
+}
+.calc-card-elevated {
+  background: var(--color-calc-surface);
+  border: 1px solid var(--color-calc-border);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.04),
+    0 12px 32px -8px rgba(15, 23, 42, 0.08);
+}
+
+/* ── Animations ── */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20% { transform: translateX(-4px); }
@@ -61,22 +84,33 @@
 }
 .animate-shake { animation: shake 0.3s ease-in-out; }
 
-/* ── A-grade pulse ── */
 @keyframes gradePulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.03); }
 }
 .animate-grade-pulse { animation: gradePulse 2s ease-in-out infinite; }
 
-/* ── Light mode overrides ── */
-.calc-light {
-  --color-calc-bg: var(--color-calc-light-bg);
-  --color-calc-surface: var(--color-calc-light-surface);
-  --color-calc-surface-hover: var(--color-calc-light-surface-hover);
-  --color-calc-border: var(--color-calc-light-border);
-  --color-calc-text: var(--color-calc-light-text);
-  --color-calc-muted: var(--color-calc-light-muted);
-  --color-calc-heading: var(--color-calc-light-heading);
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.2s ease-out; }
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scale-in 0.18s ease-out; }
+
+/* ── Dark mode (opt-in) ── */
+.calc-dark {
+  --color-calc-bg: var(--color-calc-dark-bg);
+  --color-calc-surface: var(--color-calc-dark-surface);
+  --color-calc-surface-hover: var(--color-calc-dark-surface-hover);
+  --color-calc-border: var(--color-calc-dark-border);
+  --color-calc-text: var(--color-calc-dark-text);
+  --color-calc-muted: var(--color-calc-dark-muted);
+  --color-calc-heading: var(--color-calc-dark-heading);
 }
 
 /* ══════════════════════════════════
@@ -242,4 +276,3 @@ details[open] .content-faq-question::before { content: '−'; }
   color: var(--color-calc-muted);
   margin-left: 0;
 }
-

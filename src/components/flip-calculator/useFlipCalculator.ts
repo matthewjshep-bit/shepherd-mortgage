@@ -11,7 +11,6 @@ import {
 
 export function useFlipCalculator() {
   const [inputs, setInputs] = useState<DealInputs>(DEFAULT_INPUTS);
-  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const results: DealResults = useMemo(() => calculateDeal(inputs), [inputs]);
 
@@ -23,8 +22,6 @@ export function useFlipCalculator() {
   const loadExample = useCallback(() => setInputs(EXAMPLE_DEAL), []);
   const loadDeal = useCallback((deal: DealInputs) => setInputs(deal), []);
 
-  const toggleTheme = useCallback(() => setIsDarkMode((d) => !d), []);
-
   const hasInputs = inputs.purchasePrice > 0 || inputs.arv > 0;
 
   return {
@@ -34,8 +31,6 @@ export function useFlipCalculator() {
     resetInputs,
     loadExample,
     loadDeal,
-    isDarkMode,
-    toggleTheme,
     hasInputs,
   };
 }

@@ -176,13 +176,25 @@ export function calculateDeal(inputs: DealInputs): DealResults {
 
   // Financing
   const isCash = financingType === 'cash';
-  const maxLoanFromCost = purchasePrice * (ltcPct / 100);
-  const maxLoanFromArv = arv * (ltvArvCapPct / 100);
-  const loanAmount = isCash ? 0 : Math.min(maxLoanFromCost, maxLoanFromArv);
+  let loanAmount = 0;
+  if (!isCash) {
+    if (financingType === 'hard-money' || financingType === 'private') {
+      // Hard money / private lenders finance a % of the total project cost (LTC: purchase + rehab), capped by LTV cap on ARV
+      const totalLoanTarget = (purchasePrice + totalRehab) * (ltcPct / 100);
+      const ltvCap = arv * (ltvArvCapPct / 100);
+      loanAmount = Math.min(totalLoanTarget, ltvCap);
+    } else {
+      // Conventional loans finance a straight % of the purchase price, capped by ARV LTV
+      const loanPurchasePart = purchasePrice * (ltcPct / 100);
+      const ltvCap = arv * (ltvArvCapPct / 100);
+      loanAmount = Math.min(loanPurchasePart, ltvCap);
+    }
+  }
 
   // Purchase costs
   const purchaseClosingCosts = purchasePrice * (purchaseClosingPct / 100);
-  const downPayment = purchasePrice - loanAmount + purchaseClosingCosts + inspectionCost;
+  const purchaseLoanPart = isCash ? 0 : Math.min(loanAmount, purchasePrice * (ltcPct / 100));
+  const downPayment = purchasePrice - purchaseLoanPart + purchaseClosingCosts + inspectionCost;
 
   // Interest & financing
   const monthlyInterest = holdMonths > 0 ? (loanAmount * (interestRatePct / 100)) / 12 : 0;
@@ -214,13 +226,8 @@ export function calculateDeal(inputs: DealInputs): DealResults {
   const netProfit = arv - totalProjectCost;
   const profitMargin = arv > 0 ? netProfit / arv : 0;
 
-  // Cash in deal
-  const cashInDeal =
-    downPayment +
-    totalRehab +
-    totalHoldingCosts +
-    totalSellingCosts +
-    (isCash ? 0 : originationFee + lenderFlatFees);
+  // Cash in deal (Investor's total out-of-pocket cash)
+  const cashInDeal = isCash ? totalProjectCost : totalProjectCost - loanAmount;
 
   // ROI
   const totalRoi = cashInDeal > 0 ? netProfit / cashInDeal : 0;
@@ -231,8 +238,17 @@ export function calculateDeal(inputs: DealInputs): DealResults {
       : 0;
 
   // Key calculations
-  const maxAllowableOffer = arv * 0.7 - totalRehab;
-  const breakEvenSalePrice = totalProjectCost;
+  const maxAllowableOffer = arv * 0.7 - rehabCost;
+  const sellingCostPct = (agentPct + sellerClosingPct + transferTaxPct) / 100;
+  const fixedCosts =
+    purchasePrice +
+    purchaseClosingCosts +
+    inspectionCost +
+    totalRehab +
+    totalFinancingCost +
+    totalHoldingCosts +
+    stagingCost;
+  const breakEvenSalePrice = sellingCostPct < 1 ? fixedCosts / (1 - sellingCostPct) : totalProjectCost;
   const profitPerMonth = safeHoldMonths > 0 ? netProfit / safeHoldMonths : 0;
 
   // Grade

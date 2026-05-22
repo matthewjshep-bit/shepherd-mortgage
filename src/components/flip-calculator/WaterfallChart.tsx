@@ -47,14 +47,14 @@ export default function WaterfallChart({
   const data: WaterfallData[] = categories.map((cat) => {
     if (cat.name === 'Sale Price') {
       running = cat.value;
-      return { name: cat.name, value: cat.value, start: 0, fill: '#6366F1' };
+      return { name: cat.name, value: cat.value, start: 0, fill: '#4F46E5' };
     }
     if (cat.name === 'Net Profit') {
       return {
         name: cat.name,
         value: cat.value,
         start: 0,
-        fill: cat.value >= 0 ? '#10B981' : '#F43F5E',
+        fill: cat.value >= 0 ? '#059669' : '#DC2626',
       };
     }
     const start = running + cat.value;
@@ -62,14 +62,14 @@ export default function WaterfallChart({
       name: cat.name,
       value: Math.abs(cat.value),
       start,
-      fill: '#F43F5E',
+      fill: '#DC2626',
     };
     running = start;
     return d;
   });
 
   return (
-    <div className="bg-calc-surface border border-calc-border rounded-xl p-4">
+    <div className="calc-card p-5">
       <h3 className="text-sm font-semibold text-calc-heading tracking-tight mb-4">
         Profit Waterfall
       </h3>
@@ -77,12 +77,12 @@ export default function WaterfallChart({
         <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 11, fill: '#9CA3AF' }}
+            tick={{ fontSize: 11, fill: '#64748B' }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fontSize: 11, fill: '#9CA3AF' }}
+            tick={{ fontSize: 11, fill: '#64748B' }}
             axisLine={false}
             tickLine={false}
             tickFormatter={(v) => fmt(v)}
@@ -90,14 +90,15 @@ export default function WaterfallChart({
           <Tooltip
             formatter={(value) => [fmt(Number(value)), 'Amount']}
             contentStyle={{
-              background: '#111624',
-              border: '1px solid #1F2937',
+              background: '#FFFFFF',
+              border: '1px solid #E7E5E0',
               borderRadius: '8px',
               fontSize: '12px',
-              color: '#E5E7EB',
+              color: '#0F172A',
+              boxShadow: '0 4px 12px rgba(15,23,42,0.08)',
             }}
           />
-          <ReferenceLine y={0} stroke="#1F2937" />
+          <ReferenceLine y={0} stroke="#E7E5E0" />
           {/* Invisible bar for stacking offset */}
           <Bar dataKey="start" stackId="stack" fill="transparent" />
           <Bar dataKey="value" stackId="stack" radius={[4, 4, 0, 0]}>

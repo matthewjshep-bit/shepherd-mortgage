@@ -44,17 +44,23 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
   const arvValues = arvDeltas.map((d) => inputs.arv * (1 + d / 100));
   const rehabValues = rehabDeltas.map((d) => inputs.rehabCost * (1 + d / 100));
 
-  function getCellColor(profit: number): string {
+  function getCellStyle(profit: number): { background: string; color: string } {
     if (profit > 0) {
       const intensity = Math.min(profit / maxProfit, 1);
-      return `rgba(16, 185, 129, ${0.15 + intensity * 0.55})`; // emerald
+      return {
+        background: `rgba(5, 150, 105, ${0.1 + intensity * 0.45})`, // emerald
+        color: intensity > 0.5 ? '#064E3B' : '#065F46',
+      };
     }
     const intensity = Math.min(Math.abs(profit) / Math.abs(minProfit), 1);
-    return `rgba(244, 63, 94, ${0.15 + intensity * 0.55})`; // rose
+    return {
+      background: `rgba(220, 38, 38, ${0.08 + intensity * 0.4})`, // rose
+      color: intensity > 0.5 ? '#7F1D1D' : '#991B1B',
+    };
   }
 
   return (
-    <div className="bg-calc-surface border border-calc-border rounded-xl p-4">
+    <div className="calc-card p-5">
       <h3 className="text-sm font-semibold text-calc-heading tracking-tight mb-1">
         Sensitivity Analysis
       </h3>
@@ -94,15 +100,16 @@ export default function SensitivityHeatmap({ inputs }: { inputs: DealInputs }) {
                 {arvDeltas.map((_, ci) => {
                   const profit = grid[ri][ci];
                   const isBase = rd === 0 && arvDeltas[ci] === 0;
+                  const style = getCellStyle(profit);
                   return (
                     <td key={ci} className="p-0.5">
                       <div
-                        className={`rounded-md py-2 px-1 text-[11px] font-medium tabular-nums transition-colors ${
-                          isBase ? 'ring-1 ring-calc-accent/50' : ''
+                        className={`rounded-md py-2 px-1 text-[11px] font-semibold tabular-nums transition-colors ${
+                          isBase ? 'ring-2 ring-calc-accent ring-offset-1 ring-offset-calc-surface' : ''
                         }`}
                         style={{
-                          backgroundColor: getCellColor(profit),
-                          color: '#E5E7EB',
+                          backgroundColor: style.background,
+                          color: style.color,
                           fontFamily: 'var(--font-geist-mono)',
                         }}
                         title={`ARV: ${fmtShort(arvValues[ci])} / Rehab: ${fmtShort(rehabValues[ri])}`}

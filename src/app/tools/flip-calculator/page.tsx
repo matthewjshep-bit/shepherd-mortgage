@@ -1,7 +1,4 @@
-/* Server Component — wraps the client calculator with SSR content */
-
 import FlipCalculatorClient from '@/components/flip-calculator/FlipCalculatorClient';
-import ContentSections from '@/components/flip-calculator/ContentSections';
 import {
   softwareApplicationSchema,
   faqPageSchema,
@@ -36,20 +33,25 @@ export default function FlipCalculatorPage() {
       />
 
       {/* Hero */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6 text-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-calc-heading tracking-tight leading-tight">
-          The Ultimate Fix and Flip Calculator
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 text-center">
+        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-calc-accent bg-calc-accent/8 border border-calc-accent/20 rounded-full px-3 py-1 mb-5">
+          <span className="w-1.5 h-1.5 rounded-full bg-calc-accent" />
+          Free real-time deal analyzer
+        </div>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-calc-heading tracking-tight leading-[1.05]">
+          Fix &amp; flip math,{' '}
+          <span className="bg-gradient-to-r from-calc-accent to-indigo-400 bg-clip-text text-transparent">
+            instantly clear.
+          </span>
         </h1>
-        <p className="mt-3 text-base sm:text-lg text-calc-muted max-w-2xl mx-auto">
-          Free real-time deal analyzer. Enter purchase price, ARV, and rehab costs to instantly see net profit, ROI, maximum allowable offer, and deal grade.
+        <p className="mt-5 text-base sm:text-lg text-calc-muted max-w-xl mx-auto leading-relaxed">
+          Five quick questions. Get net profit, ROI, the 70%-rule max offer, and an
+          A–F deal grade — live as you type.
         </p>
       </div>
 
       {/* Interactive Calculator (client component — unchanged) */}
       <FlipCalculatorClient />
-
-      {/* Server-rendered content for SEO/AEO */}
-      <ContentSections />
     </>
   );
 }

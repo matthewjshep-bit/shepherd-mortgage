@@ -19,16 +19,22 @@ const DashboardPanel = forwardRef<HTMLDivElement, DashboardPanelProps>(
   function DashboardPanel({ results, inputs, hasInputs }, ref) {
     if (!hasInputs) {
       return (
-        <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center px-8">
-          <div className="w-20 h-20 rounded-2xl bg-calc-accent/10 flex items-center justify-center mb-6">
-            <span className="text-4xl">📊</span>
+        <div className="calc-card flex flex-col items-center justify-center h-full min-h-[500px] text-center px-8 py-12">
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-calc-accent/15 blur-2xl rounded-full" />
+            <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-calc-accent to-indigo-500 flex items-center justify-center shadow-lg shadow-calc-accent/30">
+              <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8 text-white" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="M7 14l4-4 4 4 6-6" />
+              </svg>
+            </div>
           </div>
-          <h3 className="text-xl font-semibold text-calc-heading mb-2">
-            No deal to analyze yet
+          <h3 className="text-xl font-semibold text-calc-heading mb-2 tracking-tight">
+            Your deal scorecard appears here
           </h3>
-          <p className="text-calc-muted text-sm max-w-sm">
-            Enter a purchase price and ARV on the left to see your deal metrics,
-            charts, and grade update in real-time.
+          <p className="text-calc-muted text-sm max-w-sm leading-relaxed">
+            Enter a purchase price to see live profit, ROI, max allowable offer,
+            and an A–F grade — updated as you type.
           </p>
         </div>
       );
